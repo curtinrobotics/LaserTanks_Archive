@@ -23,6 +23,6 @@ Members
 |         |Arena  |Master/GUI |Controller |Tank |
 |---------|-------|-----------|-----------|-----|
 |Area lead| Adeepa|Adeepa     |Tom/Ashley |Tom  |
-|---------|
+|---------|-------|-----------|-----------|-----|
 
 ## Prerequisites
