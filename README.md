@@ -3,10 +3,10 @@ Welcome to the Laser Tank project!
 This is where we store all our code and code backups.
 
 ## Table of Contents
-##### **[Project Details](##project-details)**<br>
-##### **[Progress Made](##progress-made)**
-##### **[Prerequisites](##prerequisites)**
-##### **[Skills Needed](##skills-needed)**
+ **[Project Details](##project-details)**<br>
+ **[Progress Made](##progress-made)**<br>
+ **[Prerequisites](##prerequisites)**<br>
+ **[Skills Needed](##skills-needed)**<br>
 
 ## Project Details
 
