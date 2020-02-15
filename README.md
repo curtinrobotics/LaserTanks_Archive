@@ -3,7 +3,7 @@ Welcome to the Laser Tank project!
 This is where we store all our code and code backups.
 
 ## Table of Contents
- **[Project Details](#project-details)**<br>
+ **[# Project Details](#project-details)**<br>
  **[Progress Made](#progress-made)**<br>
  **[Prerequisites](#prerequisites)**<br>
  **[Skills Needed](#skills-needed)**<br>
