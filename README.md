@@ -10,13 +10,13 @@ This is where we store all our code and code backups.
 
 ## Project Details
 
-**Organisation:** Curtin Robotics Club (CRoC)
-**Institute:** Curtin University (Bentley Campus)
-**Location:** Ground floor, building  204, Curtin University
-**Time:** Every Thursdays 5pm onwards 
-**Project Lead:** Adeepa Rajamanthri
-**Project Founder:** 
-**Difficulty:** Moderate to Difficult
+**Organisation:** Curtin Robotics Club (CRoC)<br>
+**Institute:** Curtin University (Bentley Campus)<br>
+**Location:** Ground floor, building  204, Curtin University<br>
+**Time:** Every Thursdays 5pm onwards <br>
+**Project Lead:** Adeepa Rajamanthri<br>
+**Project Founder:** <br>
+**Difficulty:** Moderate to Difficult<br>
 
 ## Progress Made
 
