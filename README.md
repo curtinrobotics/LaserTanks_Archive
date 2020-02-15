@@ -1,5 +1,5 @@
 # Laser Tanks
-Welcome to the Laser Tank project!
+Welcome to the Laser Tank project!<br>
 This is where we store all our code and code backups.
 
 ## Table of Contents
@@ -27,6 +27,9 @@ This is where we store all our code and code backups.
 |Members  |
 
 ## Progress Made
+###Arena
+###Controller
+###Tank
 
 ## Prerequisites
 
