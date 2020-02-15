@@ -10,7 +10,7 @@ This is where we store all our code and code backups.
 
 ## Project Details
 
-**# Organisation:** Curtin Robotics Club (CRoC)<br>
+**Organisation:** Curtin Robotics Club (CRoC)<br>
 **Institute:** Curtin University (Bentley Campus)<br>
 **Location:** Ground floor, building  204, Curtin University<br>
 **Time:** Every Thursdays 5pm onwards <br>
@@ -19,6 +19,9 @@ This is where we store all our code and code backups.
 **Difficulty:** Moderate to Difficult<br>
 
 ## Progress Made
-
+Members
+|         |Arena  |Master/GUI |Controller |Tank |
+|---------|-------|-----------|-----------|-----|
+|Area lead|Adeepa |Adeepa     |Tom/Ashley |Tom  |
 
 ## Prerequisites
