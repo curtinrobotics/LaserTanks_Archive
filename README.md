@@ -27,9 +27,9 @@ This is where we store all our code and code backups.
 |Members  |
 
 ## Progress Made
-###Arena
-###Controller
-###Tank
+### Arena
+### Controller
+### Tank
 
 ## Prerequisites
 
