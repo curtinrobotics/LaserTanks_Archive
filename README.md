@@ -4,6 +4,7 @@ This is where we store all our code and code backups.
 
 ## Table of Contents
  **[Project Details](#project-details)**<br>
+ **[Members](#Members)**<br>
  **[Progress Made](#progress-made)**<br>
  **[Prerequisites](#prerequisites)**<br>
  **[Skills Needed](#skills-needed)**<br>
@@ -18,11 +19,15 @@ This is where we store all our code and code backups.
 **Project Founder:** <br>
 **Difficulty:** Moderate to Difficult<br>
 
-## Progress Made
-Members
+## Members
+
 |         |Arena  |Master/GUI |Controller |Tank |
 |---------|-------|-----------|-----------|-----|
 |Area lead| Adeepa|Adeepa     |Tom/Ashley |Tom  |
-|---------|-------|-----------|-----------|-----|
+|Members  |
+
+## Progress Made
 
 ## Prerequisites
+
+## Skills Needed
