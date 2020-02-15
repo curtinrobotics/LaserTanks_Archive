@@ -1,0 +1,46 @@
+#######################################
+# Syntax Coloring Map For AnalogMusic Library
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+AdagioPro	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+# Adagio
+
+Initialize	KEYWORD2
+AllLampsOff	KEYWORD2
+AllLampsOn	KEYWORD2
+ProgramUp	KEYWORD2
+ProgramDown	KEYWORD2
+SetProgram	KEYWORD2
+AutoSyncronize	KEYWORD2
+White1	KEYWORD2
+White2	KEYWORD2
+White3	KEYWORD2
+SetRGB	KEYWORD2
+SetDimValue	KEYWORD2
+SetDMXStartAddress	KEYWORD2
+SetColorInPct	KEYWORD2
+SetColorHex	KEYWORD2
+RelayAControl	KEYWORD2
+RelayBControl	KEYWORD2
+RelayOnOff	KEYWORD2
+ColorTemperature	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+WhiteLed LITERAL1
+PastelColors LITERAL1
+RainbowColors LITERAL1
