@@ -3,14 +3,14 @@ Welcome to the Laser Tank project!
 This is where we store all our code and code backups.
 
 ## Table of Contents
- **[# Project Details](#project-details)**<br>
+ **[Project Details](#project-details)**<br>
  **[Progress Made](#progress-made)**<br>
  **[Prerequisites](#prerequisites)**<br>
  **[Skills Needed](#skills-needed)**<br>
 
 ## Project Details
 
-**Organisation:** Curtin Robotics Club (CRoC)<br>
+**# Organisation:** Curtin Robotics Club (CRoC)<br>
 **Institute:** Curtin University (Bentley Campus)<br>
 **Location:** Ground floor, building  204, Curtin University<br>
 **Time:** Every Thursdays 5pm onwards <br>
