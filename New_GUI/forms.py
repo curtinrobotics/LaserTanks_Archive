@@ -20,8 +20,11 @@ class ContactForm(Form):
       validators.Email("Please enter your email address.")])
    
    Age = IntegerField("age")
-   language = MultiCheckboxField('Languages', choices = [('cpp', 'C++'), 
-      ('py', 'Python'),('c89', 'C89'),('c99', 'C99')])
+   
    project = RadioField('Project', choices = [('LT', 'Laser Tank'), 
       ('CC', 'Climbing Clock')])
+
+   language = MultiCheckboxField('Languages', choices = [('cpp', 'C++'), 
+      ('py', 'Python'),('c89', 'C89'),('c99', 'C99')])
+   
    submit = SubmitField("Send")
