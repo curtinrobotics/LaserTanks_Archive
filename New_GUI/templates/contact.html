@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
    <body>
-      <h2 style = "text-align: center;">Contact Form</h2>
+      <h2 style = "text-align: center;">CROC</h2>
 		
       {% for message in form.name.errors %}
          <div>{{ message }}</div>
@@ -20,23 +20,29 @@
                {{ form.name.label }}<br>
                {{ form.name }}
                <br>
-               
+               <br>
                {{ form.Gender.label }} {{ form.Gender }}
                {{ form.Address.label }}<br>
                {{ form.Address }}
                <br>
-               
+               <br>
                {{ form.email.label }}<br>
                {{ form.email }}
                <br>
-               
+               <br>
                {{ form.Age.label }}<br>
                {{ form.Age }}
                <br>
-               
+               <br>
+               {{ form.project.label }}<br>
+               {{ form.project }}
+               <br>
+               <br>
                {{ form.language.label }}<br>
                {{ form.language }}
                <br>
+               <br>
+               
                {{ form.submit }}
             </div>
             

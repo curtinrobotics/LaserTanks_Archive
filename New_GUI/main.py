@@ -33,11 +33,12 @@ def contact():
          flash('All fields are required.')
          return render_template('contact.html', form = form)
       else:
-         print(form.name)
+         print(form.language.data)
+         print(form.data)#["language"])
          return render_template('about.html')
    else:
       return render_template('contact.html', form = form)
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True,host = '0.0.0.0')
