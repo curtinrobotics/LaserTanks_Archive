@@ -22,7 +22,16 @@ def about():
 
 @app.route('/success/<name>')
 def success(name):
-   return 'welcome %s' % name
+   print("hello")
+   if request.method == 'POST':
+      if request.form.get('submit') == 'submit':
+         return 'welcome'
+   else:
+      return render_template("test.html",val = "50")
+
+   #return render_template("test.html")
+   #return 'welcome %s' % name
+   #return render_template("test.html")
 
 @app.route('/contact', methods = ['GET', 'POST'])
 def contact():
@@ -41,5 +50,4 @@ def contact():
 
 
 if __name__ == "__main__":
-   SERVER_NAME ="wsd"
-   app.run(debug=True,host = '0.0.0.0')
+   app.run(debug=True)#host = '0.0.0.0',port=5005)

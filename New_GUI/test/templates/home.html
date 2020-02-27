@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Flask Tutorial</title>
+    <style>
+      .slidecontainer {
+        width: 100%;
+      }
+      
+      .slider {
+        -webkit-appearance: none;
+        width: 20%;
+        height: 25px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+      }
+      
+      .slider:hover {
+        opacity: 1;
+      }
+      
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        background: #4CAF50;
+        cursor: pointer;
+      }
+      
+      .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        background: #4CAF50;
+        cursor: pointer;
+      }
+      </style>
+  </head>
+  <body>
+    {% extends "template.html" %}
+    {% block content %}
+    
+    <h1> My First Try Using Flask </h1>
+    <p> Flask is Fun </p>
+    
+    <form action = "http://localhost:5000" method = "POST">
+       <p>Enter Name:</p>
+       <p><input type = "text" name = "nm" /></p>
+       <p><input type = "submit" value = "submit" name = "submit" /></p>
+
+       <div class="slidecontainer">
+          <input type="range" min="1" max= {{val}} value="20" class="slider" id="myRange">
+          <p>Value: <span id="demo"></span></p>
+          <p>{{val}}</p>
+       </div>
+
+       <script>
+        var slider = document.getElementById("myRange");
+        var output = document.getElementById("demo");
+        output.innerHTML = slider.value;
+        
+        slider.oninput = function() {
+          output.innerHTML = this.value;
+        }
+        </script>
+    </form>
+    {% endblock %}
+ </body>
+</html>
