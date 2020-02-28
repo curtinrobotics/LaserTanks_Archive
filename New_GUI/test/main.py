@@ -12,9 +12,9 @@ def home():
          user = request.form['nm']
          return redirect(url_for('success',name = user))
    else:
-      return render_template("home.html")
+      return render_template("home.html",val = "50")
 
-   return render_template("home.html")
+   return render_template("home.html",val = "50")
 
 @app.route("/about", methods = ['GET', 'POST'])
 def about():
@@ -22,12 +22,26 @@ def about():
 
 @app.route('/success/<name>')
 def success(name):
+   """
+   success [summary]
+   
+   Parameters
+   ----------
+   name : [type]
+       [description]
+   
+   Returns
+   -------
+   [type]
+       [description]
+   """
    print("hello")
    if request.method == 'POST':
-      if request.form.get('submit') == 'submit':
+      print("ght")
+      if request.form.get('submit1') == 'submit1':
          return 'welcome'
    else:
-      return render_template("test.html",val = "50")
+      return render_template("test.html",n = '50')
 
    #return render_template("test.html")
    #return 'welcome %s' % name
@@ -48,6 +62,6 @@ def contact():
    else:
       return render_template('contact.html', form = form)
 
-
 if __name__ == "__main__":
    app.run(debug=True)#host = '0.0.0.0',port=5005)
+
