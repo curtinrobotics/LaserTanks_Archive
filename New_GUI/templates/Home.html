@@ -16,10 +16,15 @@
         font-size: 50px;
       }
       body {
-          background-image: url("http://www.allwhitebackground.com/images/6/Game-Tank-Background-Free-Picture.jpg");
-          background-repeat: no-repeat;
-          background-attachment: fixed;  
-          background-size: cover;
+        background-image: url("http://www.allwhitebackground.com/images/6/Game-Tank-Background-Free-Picture.jpg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;  
+        background-size: cover;
+      }
+      div.absolute {
+        position: relative;
+        top: 300px;
+        align: center;
       }
     </style>
   </head>
@@ -29,7 +34,7 @@
     <form action = "http://localhost:5000" method = "POST">
       <font face="Cooper Black" color="green" size="4">
       <center>
-        <div>
+        <div class="absolute">
           <table>
             <tr>
               <td><p><input type = "submit" value = "Free For All" name = "Free_For_All" ></p></td>
