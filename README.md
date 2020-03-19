@@ -23,7 +23,7 @@ This is where we store all our code and code backups.
 
 |         |Arena  |Master/GUI |Controller |Tank |
 |---------|-------|-----------|-----------|-----|
-|Area lead| Adeepa|Adeepa     |Tom/Ashley |Tom  |
+|Area lead| Adeepa|Adeepa     |Tom        |Tom  |
 |Members  |
 
 ## Progress Made
