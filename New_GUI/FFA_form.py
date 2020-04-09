@@ -13,6 +13,8 @@ class MultiCheckboxField(SelectMultipleField):
 
 class FFAF(Form):
    name = TextField("Name Of Student",[validators.Required("Please enter your name.")])
+   P1 = TextField("Name Of Player 1",[validators.Required("Please enter your name.")])
+
    Gender = RadioField('Gender', choices = [('M','Male'),('F','Female')])
    Address = TextAreaField("Address")
    
