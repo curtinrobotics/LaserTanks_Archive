@@ -1,127 +1,130 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-   <head>
-      <title>CSS Website Layout</title>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      
-    <style>
-    *{
-          box-sizing: border-box;
-      }
-    
-      body 
-      {
-        margin: 0;
-        background-image:linear-gradient(to bottom, 
-            rgba(226, 11, 11, 0.418), rgba(245, 245, 245, 0.651)), 
-            url("http://www.allwhitebackground.com/images/6/Game-Tank-Background-Free-Picture.jpg");
-        background-repeat: no-repeat;
-        background-attachment: fixed;  
-        background-size: cover;
-      }
+    <head>
+        <title>CSS Website Layout</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-     
-      /* Create three equal columns that floats next to each other */
-      .column 
-      {
-        float: left;
-        width: 25%;
-        padding: 10px;
-        height: 300px;
-      }
+        <style>
+            *{
+                box-sizing: border-box;
+            }
 
-      /* Clear floats after the columns */
-      .row:after 
-      {
-          content: "";
-          display: table;
-          clear: both;
-      }
+            body 
+            {
+                margin: 0;
+                background-image:linear-gradient(to bottom, 
+                rgba(226, 11, 11, 0.418), rgba(245, 245, 245, 0.651)), 
+                url("http://www.allwhitebackground.com/images/6/Game-Tank-Background-Free-Picture.jpg");
+                background-repeat: no-repeat;
+                background-attachment: fixed;  
+                background-size: cover;
+            }
 
-      /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
-      @media screen and (max-width:600px) 
-      {
-          .column 
-          {
-              width: 100%;
-          }
-      }
-      </style>
-  </head>
-   <body>
-      <h2 style = "text-align: center;">CROC</h2>
-		
-      {% for message in form.name.errors %}
-         <div>{{ message }}</div>
-      {% endfor %}
-      
-      {% for message in form.email.errors %}
-         <div>{{ message }}</div>
-      {% endfor %}
-      
-      <form action = "http://localhost:5000/contact" method = post>
-        
-                      
-        <div style = font-size:20px; font-weight:bold; margin-left:500px;>
-            {{ form.name.label }}
-            <br>
-            {{ form.name }}
-            <br>
-            <br>
-            {{ form.Gender.label }} 
-            {{ form.Gender }}
-            {{ form.Address.label }}
-            <br>
-            {{ form.Address }}
-            <br>
-            <br>
-            {{ form.email.label }}
-            <br>
-            {{ form.email }}
-            <br>
-            <br>
-            <div class="row">
-                <div class="column">
-                    <h2>Column1</h2>
-                </div>
-                <div class="column">
-                    <h2>Column2</h2>
-                </div>
-                <div class="column">
-                    <h2>Column3</h2>
-                </div>
-                <div class="column">
-                    <h2>Column4</h2>
-                </div>
-            </div>
-            <b>{{ form.Age.label }}</b>
-            <br>
-            {{ form.Age }}
-            <br>
-            <br>
-            {{ form.project.label }}
-            <br>
-            {{ form.project }}
-            <br>
-            <br>
-            {{ form.language.label }}
-            <br>
-            {{ form.language }}
-            <br>
-            <p id="demo">Good Evening!</p>
-            <br>
 
-            {{ form.submit }}
-            <script>
-                if (new Date().getHours() < 18) {
-                  document.getElementById("demo").innerHTML = "Good day!";
+            /* Create three equal columns that floats next to each other */
+            .column 
+            {
+                float: left;
+                width: 25%;
+                padding: 10px;
+                height: 300px;
+            }
+
+            /* Clear floats after the columns */
+            .row:after 
+            {
+                content: "";
+                display: table;
+                clear: both;
+            }
+
+            /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+            @media screen and (max-width:600px) 
+            {
+                .column 
+                {
+                    width: 100%;
                 }
-            </script>
-            
+            }
+            img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="/static/LaserTank.png" align="middle" width="750" height="150"/>
+        {% for message in form.name.errors %}
+        <div>
+            {{ message }}
         </div>
-            
-      
-      </form>
-   </body>
+        {% endfor %}
+
+        {% for message in form.email.errors %}
+        <div>
+            {{ message }}
+        </div>
+        {% endfor %}
+
+        <form action = "http://localhost:5000/contact" method = post>
+            <div style = font-size:20px; font-weight:bold; margin-left:500px;>
+                {{ form.name.label }}
+                <br>
+                {{ form.name }}
+                <br>
+                <br>
+                {{ form.Gender.label }} 
+                {{ form.Gender }}
+                {{ form.Address.label }}
+                <br>
+                {{ form.Address }}
+                <br>
+                <br>
+                {{ form.email.label }}
+                <br>
+                {{ form.email }}
+                <br>
+                <br>
+                <div class="row">
+                    <div class="column">
+                        <h2>Column1</h2>
+                    </div>
+                    <div class="column">
+                        <h2>Column2</h2>
+                    </div>
+                    <div class="column">
+                        <h2>Column3</h2>
+                    </div>
+                    <div class="column">
+                        <h2>Column4</h2>
+                    </div>
+                </div>
+                <b>{{ form.Age.label }}</b>
+                <br>
+                {{ form.Age }}
+                <br>
+                <br>
+                {{ form.project.label }}
+                <br>
+                {{ form.project }}
+                <br>
+                <br>
+                {{ form.language.label }}
+                <br>
+                {{ form.language }}
+                <br>
+                <p id="demo">Good Evening!</p>
+                <br>
+                {{ form.submit }}
+                <script>
+                    if (new Date().getHours() < 18) 
+                    {
+                        document.getElementById("demo").innerHTML = "Good day!";
+                    }
+                </script>
+            </div>
+        </form>
+    </body>
 </html>
