@@ -37,17 +37,18 @@ This is where we store all our code and code backups.
 ## Prerequisites
 
 ## Skills Needed
- Markup : * Programming
-            * C++/Arduino
-            * C
-            * HTML
-            * CSS
-            * JavaScript
-          * Mechanical
-            * AutoCad
-            * Inventor
-            * Flash print
-          * Electrical
-            * EagleCad
-          
+
+ * Programming
+   * C++/Arduino
+   * C
+   * HTML
+   * CSS
+   * JavaScript
+ * Mechanical
+   * AutoCad
+   * Inventor
+   * Flash print
+ * Electrical
+   * EagleCad
+
 
