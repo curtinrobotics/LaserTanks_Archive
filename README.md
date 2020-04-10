@@ -35,6 +35,8 @@ This is where we store all our code and code backups.
 ### Tank
 
 ## Prerequisites
+* Engineering second/third/fourth year
+* CompSi at least 2nd year
 
 ## Skills Needed
 
