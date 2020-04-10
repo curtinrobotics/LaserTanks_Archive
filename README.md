@@ -21,11 +21,13 @@ This is where we store all our code and code backups.
 
 ## Members
 
-|         |Arena  |GUI        |Central Controller|Controller |Tank  |
-|---------|-------|-----------|------------------|-----------|------|
-|Area lead| Adeepa|Adeepa     |Adeepa            |Tom        |Tom   |
-|Members  |Finn   |Zach       |Finn              |Morgan     |Estiam|
-|         |Oliver |Oliver     |                  |           |      |
+|         |Arena   |GUI        |Central Controller|Controller |Tank  |
+|---------|--------|-----------|------------------|-----------|------|
+|Area lead| Adeepa |Adeepa     |Adeepa            |Tom        |Tom   |
+|Members  |Finn    |Zachary    |Finn              |Morgan     |Estiam|
+|         |Oliver  |Oliver     |                  |           |Nathan|
+|         |Chaitany|Ryan       |                  |           |      |
+
 
 ## Progress Made
 ### Arena
