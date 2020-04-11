@@ -13,7 +13,10 @@ def index():
    if request.method == 'POST':
       if request.form.get('Free_For_All') == 'Free For All':
          print("Free_For_All")
-         return redirect(url_for('FFA'))
+         try:
+            return redirect(url_for('FFA'))
+         except:
+            return "page not found"
       elif  request.form.get('Team') == 'Team':
          print("Team")
       else:
@@ -34,7 +37,10 @@ def FFA():
          print(form.data)#["language"])
          return "hello"
    else:
-      return render_template("ffa.html", form = form)
+      try:
+        return render_template("ffa.html", form = form)
+      except:
+         return "page not found"
 
 
 def get_ip():

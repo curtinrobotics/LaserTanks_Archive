@@ -29,4 +29,7 @@ class FFAF(Form):
    language = MultiCheckboxField('Languages', choices = [('cpp', 'C++'), 
       ('py', 'Python'),('c89', 'C89'),('c99', 'C99')])
    
+   Nom_player = SelectField(label ='Number of Players', choices=[('1','One Player'),('2','Two Players')
+                     ,('3','Three Players'),('4','Four Players')])
+
    submit = SubmitField("Send")
