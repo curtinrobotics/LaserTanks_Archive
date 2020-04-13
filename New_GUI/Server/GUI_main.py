@@ -33,12 +33,10 @@ def FFA():
          flash('All fields are required.')
          return render_template('ffa.html', form = form)
       else:
-         print(form.language.data)
-         print(form.data)#["language"])
          return "hello"
    else:
       try:
-        return render_template("ffa.html", form = form)
+         return render_template("ffa.html", form = form)
       except:
          return "page not found"
 
