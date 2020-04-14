@@ -31,8 +31,20 @@ def FFA():
    if request.method == 'POST':
       if form.validate() == False:
          flash('All fields are required.')
-         return render_template('ffa.html', form = form)
+         print(form.Nom_player.data)
+         player_nom = form.Nom_player.data
+         if player_nom == "1":
+            column = "50%"
+         if player_nom == "2":
+            column = "33.33%"
+         if player_nom == "3":
+            column = "25%"
+         if player_nom == "4":
+            column = "20%"
+         print(column)
+         return render_template('ffa.html', form = form,column=column)
       else:
+         print(form.Nom_player.data)
          return "hello"
    else:
       try:

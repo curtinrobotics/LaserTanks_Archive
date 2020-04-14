@@ -41,7 +41,8 @@ def success(name):
       if request.form.get('submit1') == 'submit1':
          return 'welcome'
    else:
-      return render_template("test.html",n = '50')
+      n = "50%"
+      return render_template("test.html",n = n)
 
    #return render_template("test.html")
    #return 'welcome %s' % name

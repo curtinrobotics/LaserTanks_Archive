@@ -27,24 +27,9 @@
             {
                 float: left;
                 padding: 10px;
-                width: 100%;
                 height: 300px;
-            }
-            .one
-            {
-                width: 50%;
-            }
-            .two
-            {
-                width: 33.33%;
-            }
-            .three
-            {
-                width: 25;
-            }
-            .four
-            {
-                width: 20%;
+                width: {{column}};
+                
             }
             
 
@@ -85,23 +70,24 @@
                         {{ form.Nom_player.label }}
                         <br>
                         {{ form.Nom_player }}
-                        {{ form.Nom_player.data }}
+                        <br>
+                        {{ form.submit }}
                     </div>
                     {% if form.Nom_player.data >= '1' %}
                     
-                        <div class="column one">
+                        <div class="column">
                             <h2>Column1</h2>
                         </div>
                         {% if form.Nom_player.data >= '2' %}
-                            <div class="column two">
+                            <div class="column">
                                 <h2>Column2</h2>
                             </div>
                             {% if form.Nom_player.data >= '3' %}
-                                <div class="column three">
+                                <div class="column">
                                     <h2>Column3</h2>
                                 </div>
                                 {% if form.Nom_player.data >= '4' %}
-                                    <div class="column four">
+                                    <div class="column">
                                         <h2>Column4</h2>
                                     </div>
                                 {% endif %}
@@ -114,7 +100,6 @@
                 
                 <p id="demo">Good Evening!</p>
                 <br>
-                {{ form.submit }}
                 <script>
                     if (new Date().getHours() < 18) 
                     {
