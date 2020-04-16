@@ -32,5 +32,8 @@ class FFAF(Form):
    '''
    Nom_player = SelectField(label ='Number of Players', choices=[('1','One Player'),('2','Two Players')
                      ,('3','Three Players'),('4','Four Players')])
-
+   P1 = TextField("Name Of Player 1")
+   P2 = TextField("Name Of Player 2")
+   P3 = TextField("Name Of Player 3")
+   P4 = TextField("Name Of Player 4")
    submit = SubmitField("Send")
