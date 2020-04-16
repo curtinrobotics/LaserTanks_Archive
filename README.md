@@ -27,6 +27,7 @@ This is where we store all our code and code backups.
 |Members  |Finn    |Zachary    |Finn              |Morgan     |Estiam|
 |         |Oliver  |Oliver     |                  |           |Nathan|
 |         |Chaitany|Ryan       |                  |           |      |
+|         |        |Josh       |                  |           |      |
 
 
 ## Progress Made
