@@ -1,9 +1,9 @@
 from flask_wtf import Form
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectMultipleField
+from wtforms import *
+from wtforms.fields.html5 import DecimalRangeField
 from wtforms.widgets import ListWidget, CheckboxInput
 from wtforms.validators import Required
-from wtforms import TextField, IntegerField, TextAreaField, SubmitField, RadioField,SelectField
 
 from wtforms import validators, ValidationError
 
@@ -36,4 +36,7 @@ class FFAF(Form):
    P2 = TextField("Name Of Player 2")
    P3 = TextField("Name Of Player 3")
    P4 = TextField("Name Of Player 4")
+
+   age = DecimalRangeField('Age', default=0)
+
    submit = SubmitField("Send")
