@@ -24,7 +24,7 @@ This is where we store all our code and code backups.
 |         |Arena   |GUI        |Central Controller|Controller |Tank  |
 |---------|--------|-----------|------------------|-----------|------|
 |Area lead| Adeepa |Adeepa     |Adeepa            |Tom        |Tom   |
-|Members  |Finn    |Zachary    |Finn              |Morgan     |Estiam|
+|Members  |Finn    |Zachary    |Finn              |Morgan     |Estian|
 |         |Oliver  |Oliver     |                  |           |Nathan|
 |         |Chaitany|Ryan       |                  |           |      |
 |         |        |Josh       |                  |           |      |
