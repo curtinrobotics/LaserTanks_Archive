@@ -1,7 +1,5 @@
 # Boozebot GUI Readme
 
-
-
 ## How to Run
 
 This program uses [Flask](https://flask.palletsprojects.com) to run. The flask extension should already be contained in the venv (Virtual Environment) folder.
@@ -36,9 +34,9 @@ Flask should now be running on a local port! Click the link to open in browser.
 
 > :information_source: *If you click to the left of line numbers in VS Code, you can set break points which trigger when you run the code. THe debugger also displays local values. These tools are super helful for debugging!* :grin: :grin:
 
-# Appendices
+## Appendices
 
-## Launch.Json
+### Launch.Json
 
 Copy and paste the below text into the automatically generated file in VS Code.
 
