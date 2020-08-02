@@ -1,12 +1,15 @@
-<!-- markdownlint-disable MD033 -->
 # Boozebot GUI Readme
+
+
 
 ## How to Run
 
 This program uses [Flask](https://flask.palletsprojects.com) to run. The flask extension should already be contained in the venv (Virtual Environment) folder.
 
 ### Software Requirements
+
 You will need:
+
 * VS Code
 * Python 3 installed
 
@@ -21,17 +24,24 @@ cd New_GUI`
 
 On **VS Code**, go to the debugging menu here:
 
-<img src="https://lh5.googleusercontent.com/5VplOUcd7DuM0Wd0KOtyZMcjC4XeyST3T6V2HqxX37LIh7KtsTDAXMpu6TG26u00_MEzYY7WbpYdmQJrV7fk=w1790-h1078" />
+![VS Code: Debugging Icon](https://i.imgur.com/DNNyctq.png)
 
-Click the play button. If VS Code says you need to have a launch.json configured, click [here](#Launch.Json).
+Make sure that *Python - Flask* is selected on the debugging menu. Click the play button.
+
+![VS Code: Run Debugging](https://i.imgur.com/GYLKpdp.png)"
+
+> :warning: *If VS Code says you need to have a launch.json configured, click [here](#Launch.Json).*
 
 Flask should now be running on a local port! Click the link to open in browser.
 
-> :information_source: **If you click to the left of line numbers in VS Code, you can set break points which trigger when you run the code. THe debugger also displays local values. These tools are super helful for debugging!** :grin: :grin:
+> :information_source: *If you click to the left of line numbers in VS Code, you can set break points which trigger when you run the code. THe debugger also displays local values. These tools are super helful for debugging!* :grin: :grin:
 
 # Appendices
 
 ## Launch.Json
+
+Copy and paste the below text into the automatically generated file in VS Code.
+
 ```Json
 {
     // Use IntelliSense to learn about possible attributes.
