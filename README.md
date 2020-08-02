@@ -1,3 +1,4 @@
+<!-- markdownlint-disable MD033 -->
 # Boozebot GUI Readme
 
 ## How to Run
@@ -20,9 +21,13 @@ cd New_GUI`
 
 On **VS Code**, go to the debugging menu here:
 
-<iframe src="https://drive.google.com/file/d/1htdf-faGNMdkhsFsCT0ZG_1CbQjnKd-L/preview" width="640" height="480"></iframe>
+<html><iframe src="https://drive.google.com/file/d/1htdf-faGNMdkhsFsCT0ZG_1CbQjnKd-L/preview" width="640" height="480"></iframe></html>
 
-Click the play button. If VS Code says you need to have a launch.json configured, click [here](#Launch.Json)
+Click the play button. If VS Code says you need to have a launch.json configured, click [here](#Launch.Json).
+
+Flask should now be running on a local port! Click the link to open in browser.
+
+
 
 # Appendices
 
