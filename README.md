@@ -27,12 +27,11 @@ Click the play button. If VS Code says you need to have a launch.json configured
 
 Flask should now be running on a local port! Click the link to open in browser.
 
-
+> :information_source: **If you click to the left of line numbers in VS Code, you can set break points which trigger when you run the code. THe debugger also displays local values. THese tools are super helful for debugging! :grin: :grin:
 
 # Appendices
 
 ## Launch.Json
-
 ```Json
 {
     // Use IntelliSense to learn about possible attributes.
