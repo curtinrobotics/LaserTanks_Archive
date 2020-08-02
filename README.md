@@ -1,57 +1,57 @@
-# Laser Tanks
-Welcome to the Laser Tank project!<br>
-This is where we store all our code and code backups.
+# Boozebot GUI Readme
 
-## Table of Contents
- **[Project Details](#project-details)**<br>
- **[Members](#Members)**<br>
- **[Progress Made](#progress-made)**<br>
- **[Prerequisites](#prerequisites)**<br>
- **[Skills Needed](#skills-needed)**<br>
+## How to Run
 
-## Project Details
+This program uses [Flask](https://flask.palletsprojects.com) to run. The flask extension should already be contained in the venv (Virtual Environment) folder.
 
-**Organisation:** Curtin Robotics Club (CRoC)<br>
-**Institute:** Curtin University (Bentley Campus)<br>
-**Location:** Ground floor, building  204, Curtin University<br>
-**Time:** Every Thursdays 5pm onwards <br>
-**Project Lead:** Adeepa Rajamanthri<br>
-**Project Founder:** <br>
-**Difficulty:** Moderate to Difficult<br>
+### Software Requirements
+You will need:
+* VS Code
+* Python 3 installed
 
-## Members
+### Terminal Commands
 
-|         |Arena   |GUI        |Central Controller|Controller |Tank  |
-|---------|--------|-----------|------------------|-----------|------|
-|Area lead| Adeepa |Adeepa     |Adeepa            |Tom        |Tom   |
-|Members  |Finn    |Zachary    |Finn              |Morgan     |Estian|
-|         |Oliver  |Oliver     |                  |           |Nathan|
-|         |Chaitany|Ryan       |                  |           |      |
-|         |        |Josh       |                  |           |      |
+To run the app, open **VS Code**. Open the Terminal with <kbd>Control</kbd> + <kbd>`</kbd>.
 
+Navigate the Terminal to the New_GUI directory from the root folder.
 
-## Progress Made
-### Arena
-### Controller
-### Tank
+`JSON
+cd New_GUI`
 
-## Prerequisites
-* Engineering second/third/fourth year
-* CompSi at least 2nd year
+On **VS Code**, go to the debugging menu here:
 
-## Skills Needed
+<iframe src="https://drive.google.com/file/d/1htdf-faGNMdkhsFsCT0ZG_1CbQjnKd-L/preview" width="640" height="480"></iframe>
 
- * Programming
-   * C++/Arduino
-   * C
-   * HTML
-   * CSS
-   * JavaScript
- * Mechanical
-   * AutoCad
-   * Inventor
-   * Flash print
- * Electrical
-   * EagleCad
+Click the play button. If VS Code says you need to have a launch.json configured, click [here](#Launch.Json)
 
+# Appendices
 
+## Launch.Json
+
+```Json
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Flask",
+            "type": "python",
+            "request": "launch",
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "New_GUI/GUI_main.py",
+                "FLASK_ENV": "development",
+                "FLASK_DEBUG": "0"
+            },
+            "args": [
+                "run",
+                "--no-debugger",
+                "--no-reload"
+            ],
+            "jinja": true
+        }
+    ]
+}
+```
