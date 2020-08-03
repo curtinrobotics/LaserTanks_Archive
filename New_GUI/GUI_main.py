@@ -71,5 +71,13 @@ if __name__ == '__main__':
    """
     main function
    """
-   IP = get_ip()   
+   IP = get_ip()
+   
+   url_for('static', filename="dist/reveal.css")
+   url_for('static', filename="dist/theme/black.css")
+   url_for('static', filename="plugin/highlight/monokai.css")
+   url_for('static', filename="dist/reveal.js")
+   url_for('static', filename="plugin/highlight/highlight.js")
+   url_for('static', filename="LaserTank.png")
+
    app.run(debug=True, host=IP,port=5005)
