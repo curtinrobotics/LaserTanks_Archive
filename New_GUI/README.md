@@ -10,7 +10,10 @@ You will need to have the following installed on your computer.
 
 * [VS Code](https://code.visualstudio.com/download)
 * [Python 3](https://www.python.org/downloads/)
-* [Flask](https://flask.palletsprojects.com) (necessary to use VS Code's debugging feature)
+* [Pip](https://pypi.org/project/pip/)
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/installation/) (necessary to use VS Code's debugging feature)
+
+If you experience issues installing Flask on windows, click [here](#Install-Flask-on-Windows).
 
 ### Terminal Commands
 
@@ -29,35 +32,15 @@ Make sure that *Python - Flask* is selected on the debugging menu. Click the pla
 
 ![VS Code: Run Debugging](https://i.imgur.com/GYLKpdp.png)"
 
-> :warning: *If VS Code says you need to have a launch.json configured, click [here](#Launch.Json-File). If you still have problems, click [here](#Terminal-Launch).*
+> :warning: *If VS Code says you need to have a launch.json configured, click [here](#Launch.Json).*
 
 Flask should now be running on a local port! Click the link to open in browser.
 
 > :information_source: *If you click to the left of line numbers in VS Code, you can set break points which trigger when you run the code. THe debugger also displays local values. These tools are super helful for debugging!* :grin: :grin:
 
-## Who to Contact
+# Appendices
 
----
-
-### Adeepa Rajamanthri
-
-Project Lead
-
-[Adeep.rajamanthri@gmail.com](mailto:Adeep.rajamanthri@gmail.com.)
-
----
-
-### Ryan Walton
-
-GUI Lead
-
-[ryanjwalton94@gmail.com](mailto:ryanjwalton94@gmail.com)
-
----
-
-## Appendices
-
-### Launch.Json File
+## Launch.Json
 
 Copy and paste the below text into the automatically generated file in VS Code.
 
@@ -89,34 +72,15 @@ Copy and paste the below text into the automatically generated file in VS Code.
 }
 ```
 
-## Terminal Launch
+## Install Flask on Windows
 
-You will need to run flask manually through the terminal.
+Command prompt can work weirdly with python sometimes. To fix install issues, follow this guide:
 
-Since some of the configuration has already been done, use this guide, not the one below as it will overide current settings.
+1. First install python from their [website](https://www.python.org/downloads/). Make sure you use the executable installer.
+2. Try installing Flask with `pip install flask`. If that doesn't work, install Pip with `py -3 -m pip install --upgrade pip`.
 
-### Steps
+    :information-source: If the terminal say you are missing an environment variable, copy the path listed in the output. The open the start menu and type path. A result saying edit sytem variables will appear. CLick it.
 
-1. Activate the virtual environment. Make sure this is done in the New_GUI directory.
+    After installing pip and setting path varibles, try installing Flask again.
+3. Flask should now work!
 
-     **On MacOS/Linux**
-
-    ```shell
-    $ . venv/bin/activate
-    ```
-
-    **On Windows**
-
-    ```shell
-    > venv\Scripts\activate
-    ```
-
-2. Set the root app variable, then run the app. Type the below commands:
-
-    ```shell
-    $ export FLASK_APP=GUI_Main.py
-    $ flask run
-    * Running on http://127.0.0.1:5000/
-    ```
-
-Look at the [Flask Documentation](https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application) for further details.
