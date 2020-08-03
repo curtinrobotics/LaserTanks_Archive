@@ -13,7 +13,7 @@ You will need to have the following installed on your computer.
 * [Pip](https://pypi.org/project/pip/)
 * [Flask](https://flask.palletsprojects.com/en/1.1.x/installation/) (necessary to use VS Code's debugging feature)
 
-If you experience issues installing Flask on windows, click [here](#Install-Flask-on-Windows).
+> :information-source: If you experience issues installing Flask on windows, click [here](#Install-Flask-on-Windows).
 
 ### Terminal Commands
 
@@ -79,7 +79,7 @@ Command prompt can work weirdly with python sometimes. To fix install issues, fo
 1. First install python from their [website](https://www.python.org/downloads/). Make sure you use the executable installer.
 2. Try installing Flask with `pip install flask`. If that doesn't work, install Pip with `py -3 -m pip install --upgrade pip`.
 
-    :information-source: If the terminal say you are missing an environment variable, copy the path listed in the output. The open the start menu and type path. A result saying edit sytem variables will appear. CLick it.
+    >:information-source: If the terminal say you are missing an environment variable, copy the path listed in the output. The open the start menu and type path. A result saying edit sytem variables will appear. Click it, then click Environment Variables in the dialog box. In the box labelled "User Variables", click "Path" then "Edit...". Click new in the dialog box and paste the path you copied from the coomand-line.
 
     After installing pip and setting path varibles, try installing Flask again.
 3. Flask should now work!
