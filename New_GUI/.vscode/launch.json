@@ -5,38 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Arduino",
-            "type": "arduino",
+            "name": "Python: Flask",
+            "type": "python",
             "request": "launch",
-            "program": "${file}",
-            "cwd": "${workspaceFolder}",
-            "MIMode": "gdb",
-            "targetArchitecture": "arm",
-            "miDebuggerPath": "",
-            "debugServerPath": "",
-            "debugServerArgs": "",
-            "customLaunchSetupCommands": [
-                {
-                    "text": "target remote localhost:3333"
-                },
-                {
-                    "text": "file \"${file}\""
-                },
-                {
-                    "text": "load"
-                },
-                {
-                    "text": "monitor reset halt"
-                },
-                {
-                    "text": "monitor reset init"
-                }
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "GUI_main.py",
+                "FLASK_ENV": "development",
+                "FLASK_DEBUG": "0"
+            },
+            "args": [
+                "run",
+                "--no-debugger",
+                "--no-reload"
             ],
-            "stopAtEntry": true,
-            "serverStarted": "Info\\ :\\ [\\w\\d\\.]*:\\ hardware",
-            "launchCompleteCommand": "exec-continue",
-            "filterStderr": true,
-            "args": []
+            "jinja": true
         }
     ]
 }

@@ -98,13 +98,17 @@ Since some of the configuration has already been done, use this guide, not the o
 
 1. Activate the virtual environment. Make sure this is done in the New_GUI directory.
 
-    On Unix
+     **On MacOS/Linux**
 
-    `$ . venv/bin/activate`
+    ```shell
+    $ . venv/bin/activate
+    ```
 
-    On Windows
+    **On Windows**
 
-    `> venv\Scripts\activate`
+    ```shell
+    > venv\Scripts\activate
+    ```
 
 2. Set the root app variable, then run the app. Type the below commands:
 
