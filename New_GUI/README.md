@@ -2,14 +2,15 @@
 
 ## How to Run
 
-This program uses [Flask](https://flask.palletsprojects.com) to run. The flask extension should already be contained in the venv (Virtual Environment) folder.
+This program uses [Flask](https://flask.palletsprojects.com) overlayed with [Reveal.js](https://revealjs.com/) to run. The flask extension should already be contained in the venv (Virtual Environment) folder.
 
 ### Software Requirements
 
-You will need:
+You will need to have the following installed on your computer.
 
-* VS Code
-* Python 3 installed
+* [VS Code](https://code.visualstudio.com/download)
+* [Python 3](https://www.python.org/downloads/)
+* [Flask](https://flask.palletsprojects.com) (necessary to use VS Code's debugging feature)
 
 ### Terminal Commands
 
