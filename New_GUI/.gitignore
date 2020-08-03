@@ -12,3 +12,4 @@ node_modules/
 dist/*.map
 test
 examples
+New_GUI/.vscode/settings.json
