@@ -19,6 +19,10 @@ The below packages are included in the virtual environment:
 * [Flask](https://flask.palletsprojects.com/en/1.1.x/installation/) (necessary to use VS Code's debugging feature)
 * [Flask WTF](https://flask-wtf.readthedocs.io/en/stable/)
 
+#### Potential Package Candidates
+
+- [Custom Reveal.js Controls](https://rajgoel.github.io/reveal.js-demos/customcontrols-demo.html#/1)
+
 If for some reason your computer says you need to install them, the links above redirect to the installation pages.
 
 > :information-source: If you experience issues installing Flask on windows, see [Installing Flask on Windows](#Install-Flask-on-Windows).
