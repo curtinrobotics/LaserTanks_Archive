@@ -8,11 +8,25 @@ app = Flask(__name__)
 app.secret_key = 'development key'
 
 
-@app.route("/", methods=['GET'])
+@app.route("/", methods=['GET', 'POST'])
 def index():
+   print(request.method)
+   if request.method == 'POST':
+      if request.form.get('Free_For_All') == 'Free For All':
+         print("Free_For_All")
+         try:
+            return redirect(url_for('FFA'))
+         except:
+            return "page not found"
+      elif  request.form.get('Team') == 'Team':
+         print("Team")
+      else:
+         return render_template("home.html")
+   elif request.method == 'GET':
+      print("No Post Back Call")
    return render_template("home.html")
 
-@app.route("/Free_For_All", methods = ['GET'])
+@app.route("/Free_For_All", methods = ['GET', 'POST'])
 def FFA():
    form = FFAF()
    if request.method == 'POST':

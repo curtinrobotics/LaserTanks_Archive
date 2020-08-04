@@ -10,6 +10,7 @@ itle>Laser Tanks</title>
 
 		<link rel="stylesheet" href="/static/dist/reveal.css">
 		<link rel="stylesheet" href="/static/dist/theme/laser.css" id="theme">
+		<link rel="stylesheet" href="/static/plugin/highlight/monokai.css">
 	</head>
 
 	<body>
@@ -45,20 +46,20 @@ itle>Laser Tanks</title>
 					</section>
 				</section>
 				<section data-auto-animate data-auto-animate-unmatched="slide">
-					<form method="GET" action="/">
-					<input class="navigation-submit" type="submit" name="Free_For_All" value="Free For All"/></a></form>
+					<h1>New Game</h1>
+					
 				</section>
 			</div>
 
 		</div>
 
 		<script src="/static/dist/reveal.js"></script>
+		<script src="/static/plugin/highlight/highlight.js"></script>
 		<script>
 			Reveal.initialize({
 				center: true,
 				hash: true,
-				disableLayout: true,
-				plugins: [ ]
+				plugins: [ RevealHighlight ]
 			});
 		</script>
 
