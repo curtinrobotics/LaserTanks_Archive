@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+<title>Laser Tanks</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="/static/dist/reveal.css">
+		<link rel="stylesheet" href="/static/dist/theme/laser.css" id="theme">
+		<link rel="stylesheet" href="/static/plugin/highlight/monokai.css">
+		<link rel= "stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+		<style>
+			/* Below COde altered after being taken from :https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_radio */
+.nav input[type=text] {
+    border: none transparent;
+    outline: none;
+}
+
+    /* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 22px;
+    color: var(--not-selected-color);
+    text-align: center;
+    font-family: Impact, Charcoal, sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default radio button */
+  .container input[type=radio] {
+	-webkit-appearance: 
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    height: 30px;
+    width: 500px;
+    background-color: var(--not-selected-color);
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color:var(--hover-color);
+}
+  
+.container:hover {
+      color: var(--hover-color);
+}
+  
+  .container:has(input:checked) {
+    color: var(--selected-color);
+  }
+  
+  /* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: var(--selected-color);
+}
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+  /* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+  
+  /* Style the indicator (dot/circle) */
+.container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+input[type=submit]:hover input[type=submit]:active {
+							background-color: #fab700;
+							color: rgb(61, 61, 61); 
+						}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<form method="POST" action="/Setup" class="slides">
+				<section data-auto-animate data-auto-animate-unmatched="slide" data-background="static/background1.jpg">
+					<h1>Set Player Names</h1>
+					{{ injection }}
+				<section data-auto-animate data-auto-animate-unmatched="slide">
+					<input type="submit" value="Setup Game">
+				</section>
+			</form>
+		</div>
+
+		<script src="/static/dist/reveal.js"></script>
+		<script src="/static/plugin/highlight/highlight.js"></script>
+		<script>
+			Reveal.initialize({
+				center: true,
+				hash: true,
+				plugins: [ RevealHighlight ]
+			});
+		</script>
+
+	</body>
+</html>

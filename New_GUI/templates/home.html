@@ -4,13 +4,14 @@
 	<head>
 		<meta charset="utf-8">
 
-itle>Laser Tanks</title>
+<title>Laser Tanks</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<link rel="stylesheet" href="/static/dist/reveal.css">
 		<link rel="stylesheet" href="/static/dist/theme/laser.css" id="theme">
 		<link rel="stylesheet" href="/static/plugin/highlight/monokai.css">
+		<link rel= "stylesheet" type= "text/css" href="{{ url_for('static',filename='styles/main.css') }}">
 	</head>
 
 	<body>
@@ -46,8 +47,13 @@ itle>Laser Tanks</title>
 					</section>
 				</section>
 				<section data-auto-animate data-auto-animate-unmatched="slide">
-					<h1>New Game</h1>
-					
+					<style>
+						input[type=submit]:hover input[type=submit]:active {
+							background-color: #fab700;
+    						color: rgb(61, 61, 61);
+						} 
+					</style>
+					<form action="/New-Game" class="nav"><input type="submit" value="New Game"></form>
 				</section>
 			</div>
 

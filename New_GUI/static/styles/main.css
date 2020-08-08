@@ -1,0 +1,45 @@
+:root {
+    --not-selected-color: #bd1e1e;
+    --hover-color: #942a17;
+    --selected-color: #fab069;
+}
+
+.nav input[type=submit] {
+    background-color: var(--not-selected-color);
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: 50px;
+    border-radius: 2px;
+}
+.nav input[type=submit]:hover {
+    background-color: var(--selected-color);
+    color: rgb(61, 61, 61);
+}
+.nav input[type=submit]:active {
+    background-color: var(--selected-color);
+    color: rgb(61, 61, 61);
+}
+
+.container input[type=radio] + h2 {
+    color: var(--not-selected-color);
+    font-size: 40px;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.container input[type=radio]:hover + h2 {
+    text-decoration: underline;
+    color: var(--hover-color);
+}
+
+.container input:checked + h2 {
+    text-decoration: underline;
+    font-weight: bold;
+    color: var(--selected-color);
+}
