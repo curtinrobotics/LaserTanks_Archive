@@ -1,0 +1,36 @@
+/*********************************************
+ * BUTTONS
+ *********************************************/
+.reveal .slides input[type=submit] {
+    background-color: #bd1e1e;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: 50px;
+}
+
+.link button {
+    background-color: #ac2020;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-size: 50px;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  
+  .link button:hover {
+    background-color: #fab700;
+    color: rgb(61, 61, 61);
+  }
