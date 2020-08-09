@@ -4,6 +4,7 @@ import socket
 import os
 from Function import player
 from services.TemplateService import generateTemplate
+from util.HttpUtil import validateRequest
 
 app = Flask(__name__, static_folder="static")
 app.secret_key = 'development key'
@@ -29,8 +30,15 @@ def newGame():
 
 @app.route("/Setup", methods = ['GET', 'POST'])
 def setup():
+   #redirect to new game page if this page was accessed with a URL
    if request.method == 'GET':
       return redirect("/New-Game")
+
+   try:
+      validateRequest(request, "Type", "Players")
+   except KeyError:
+      return redirect("/New-Game")
+
    
    gameType = request.form["Type"]
    numPlayers = int(request.form["Players"])
