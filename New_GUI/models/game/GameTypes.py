@@ -1,5 +1,4 @@
-from models.GameModel import GameModel
-from models.PlayerModel import PlayerModel
+from models import GameModel, PlayerModel
 from enum import Enum, auto
 import time
 
@@ -41,7 +40,7 @@ class WinClause(Enum):
             else:
                 return self.__checkAllClauses(game)
         
-        def __checkStockClause(self, players: list(PlayerModel)):
+        def __checkStockClause(self, players):
             numPlayers = len(players)
             deadPlayers = 0
             gameOver = False
@@ -93,18 +92,16 @@ class WinClause(Enum):
 
 class GameType:
     def __init__(self, **kwargs):
-        self.stock: int = kwargs.pop("stock")
-        self.timeLimit: float = kwargs.pop("timeLimit")
+        self.stock: int = kwargs.get("stock")
+        self.timeLimit: float = kwargs.get("timeLimit")
         self.maxKills: int = None
-
-        if self.clause == None: 
-            self.clause: WinClause = WinClause.get(stock=self.stock, 
-                        time=self.timeLimit, maxKills=self.maxKills)
+        self.clause: WinClause = kwargs.get("clause", WinClause.get(stock=self.stock, 
+                        time=self.timeLimit, maxKills=self.maxKills))
 
     def gameOver(self, game: GameModel):
         self.clause.check
 
-class FFA(IGameType):
+class FFA(GameType):
     def __init__(self, timeLimit: float, stock: int = 3, **kwargs):
         #add params to kwargs
         kwargs["stock"] = stock 
@@ -116,7 +113,7 @@ class FFA(IGameType):
         super().__init__(**kwargs)
     
 
-class Elimination(IGameType):
+class Elimination(GameType):
     def __init__(self, stock: int, **kwargs):
         #add params to kwargs
         kwargs["stock"] = stock 
@@ -126,7 +123,7 @@ class Elimination(IGameType):
 
         super().__init__(**kwargs)
 
-class TeamBattle(IGameType):
+class TeamBattle(GameType):
     def __init__(self, maxKills: int, **kwargs):
         #add params to kwargs
         kwargs["maxKills"] = maxKills

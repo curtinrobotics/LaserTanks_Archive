@@ -1,41 +1,27 @@
 import time
-from flask import request
+import random
 from models import PlayerModel
-from models.game import Rule
-from models.game.GameTypes import IGameType
+from models.game.GameTypes import GameType
 
 
 class GameModel:
     def __init__(self, **kwargs):
         '''Construct from any number of variables.
         :param **kwargs: Valid kwargs: gameId, startTime, players, type'''
-        self.__build(kwargs)
+        self.__build(**kwargs)
 
     def __build(self, **kwargs):
         '''Construct from any number of variables.
         :param **kwargs: Valid kwargs: gameId, startTime, players, type'''
 
-        self._gameId : int = kwargs.pop('gameId')
-        self.startTime : float = kwargs.pop('startTime')
-        self.players : list(PlayerModel) = list(kwargs.pop('players'))
-        self.type : IGameType = kwargs.pop('type')
+        self.__gameId : int = kwargs.get('gameId', self.__generateId(kwargs.get("gameService")))
+        self.startTime : float = kwargs.get('startTime', time.time())
+        self.players : list[PlayerModel] = kwargs.get('players', list())
+        self.type : GameType = kwargs.get('type', GameType())
 
-        if self._gameId == None:
-            raise NameError
-
-    def buildFromForm(self, inRequest: request):
-        #get game type
-        gameType = inRequest.form["type"]
-
-        #create players
-        players = list(PlayerModel)
-
-        for ii in range(0, inRequest.form["numPlayers"] + 1):
-            name = inRequest.form["player%d" % ii]
-            players.append(PlayerModel.PlayerModel(name))
-
-        #create gameModel
-        game = self.__build(startTime=time.time(), players=players, type=gameType)
+    def __generateId(self, gameService):
+        if gameService == None:
+            self.__gameId = random.randint(10000, 99999)
     
     def timeElapsed(self):
         currentTime = time.time()
@@ -45,8 +31,8 @@ class GameModel:
         '''Returns a string containing html text of the players rendered in order'''
         playerHtmls = list() #return var
 
-        def sortFunc(p: PlayerModel):
-            return p.score()
+        def sortFunc(player: PlayerModel):
+            return player.score()
 
         def getPlaceSuffix(place):
             suffix = ''
