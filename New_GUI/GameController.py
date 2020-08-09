@@ -8,22 +8,39 @@ from services.TemplateService import generateTemplate
 app = Flask(__name__, static_folder="static")
 app.secret_key = 'development key'
 
+style=""
+
+if True:
+   styleFile = open("static/styles/main.css", "r")
+   style = styleFile.read()
+   styleFile.close()
+
+
 
 @app.route("/")
 def index():
-   return render_template("home.html")
+   return render_template("home.html", style=style)
 
 @app.route("/New-Game", methods = ['GET'])
 def newGame():
-   return render_template("new-game.html")
+   """Asks for game type and number of players
+   so that further details can be obtained in validation"""
+   return render_template("new-game.html", style=style)
 
 @app.route("/Setup", methods = ['GET', 'POST'])
 def setup():
+   if request.method == 'GET':
+      return redirect("/New-Game")
+   
    gameType = request.form["Type"]
    numPlayers = int(request.form["Players"])
-   templateInjection = generateTemplate(numPlayers)
 
-   return render_template("setup-players.html", injection=templateInjection, type=gameType)
+   return render_template("setup-players.html", numPlayers=numPlayers, style=style, type=gameType)
+
+@app.route("/Create-Game", methods = [ 'POST'])
+def createGame():
+   return render_template("Game-View.html")
+
 
 def get_ip():
    """
