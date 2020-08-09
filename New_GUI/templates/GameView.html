@@ -20,7 +20,40 @@
 
 			<div class="slides">
 				<section data-auto-animate data-auto-animate-unmatched="slide">
-					{{leaderboard}}
+					<table class="game">
+						<tr>
+							<td></td>
+							{%for player in game.players%}
+							<td align="center">
+								<p class="header">{{player.name}}</p>
+							</td>
+							{%endfor%}
+						</tr>
+						<tr>
+							<td><b>Score</b></td>
+							{%for player in game.players%}
+							<td align="center">
+								{{player.score}}
+							</td>
+							{%endfor%}
+						</tr>
+						<tr>
+							<td><b>Kills</b></td>
+							{%for player in game.players%}
+							<td align="center">
+								{{player.kills}}
+							</td>
+							{%endfor%}
+						</tr>
+						<tr>
+							<td><b>Deaths</b></td>
+							{%for player in game.players%}
+							<td align="center">
+								{{player.deaths}}
+							</td>
+							{%endfor%}
+						</tr>
+					</table>
 				</section>
 			</div>
 
