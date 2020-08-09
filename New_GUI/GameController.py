@@ -2,9 +2,11 @@ from flask import *
 from FFA_form import *
 import socket
 import os
+import time
 from Function import player
 from services.TemplateService import generateTemplate
 from util.HttpUtil import validateRequest
+from models import GameModel, PlayerModel
 
 app = Flask(__name__, static_folder="static")
 app.secret_key = 'development key'
@@ -47,7 +49,12 @@ def setup():
 
 @app.route("/Create-Game", methods = [ 'POST'])
 def createGame():
-   return render_template("GameView.html")
+   game = GameModel.GameModel()
+
+   # build model from request data
+   game.buildFromForm(request)
+
+   return render_template("GameView.html", game)
 
 
 def get_ip():
