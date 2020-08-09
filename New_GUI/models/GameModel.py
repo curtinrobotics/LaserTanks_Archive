@@ -27,14 +27,13 @@ class GameModel:
         currentTime = time.time()
         return currentTime - self.startTime
 
-    def generateLeaderboard(self):
-        '''Returns a string containing html text of the players rendered in order'''
-        playerHtmls = list() #return var
-
+    def sortPlayers(self):
         def sortFunc(player: PlayerModel):
-            return player.score()
+            return player.score
 
-        def getPlaceSuffix(place):
+        self.players.sort(reverse=True, key=sortFunc)
+    
+    def getPlaceSuffix(place):
             suffix = ''
 
             if place == 1: suffix = 'st'
@@ -43,22 +42,3 @@ class GameModel:
             else: suffix = 'st'
 
             return suffix
-
-        self.players.sort(reverse=True, key=sortFunc)
-        count = 0 #temp var
-
-        for p in self.players:
-            html = p.generatePlayerHtml()
-
-            html = "<h2>{0}{1} Place</h2><br>".format(count + 1, getPlaceSuffix(count+1)) + html
-
-            if count % 2 == 0:
-                html = "<tr>" + html
-            elif count % 2 == 1:
-                html = html + "</tr>"
-
-            count += 1
-        
-        html = '<table>' + html + '</table>'
-
-        return html

@@ -20,6 +20,7 @@ class PlayerModel:
         self.kills : int = kwargs.get('kills', 0)
         self.lives : int = kwargs.get('lives', 0)
         self.deaths : int = kwargs.get('deaths', 0)
+        self.score = 0
         self.powerups : list[Powerup] = kwargs.get('powerups', list())
         self.timeDied : float = None
         self.__robotId : int = kwargs.get('robotId', 0)
@@ -36,6 +37,11 @@ class PlayerModel:
         :param player: The player who was shoot by this one"""
         self.kills += 1
         player.deaths += 1
+
+        #update scores
+        self.updateScore()
+        player.updateScore()
+
         return self.kills
     
     def robotIsPlayer(self, robotId):
@@ -45,7 +51,7 @@ class PlayerModel:
         return self._robotId == robotId
 
     def generatePlayerHtml(self):
-        score = self.score()
+        score = self.score
         return '''<td>
                     <h3>{self.name}</h3>
                     <h4>Score: <b>{score}</b></h4>
@@ -55,11 +61,11 @@ class PlayerModel:
                         {self.listPowerups()}
                 </td>'''
     
-    def score(self) -> int:
+    def updateScore(self):
         kills = self.kills
         deaths = self.deaths
         score = 2 * (kills + 1) - deaths
-        return score
+        self.score = score
     
     def listPowerups(self):
         out = ""
