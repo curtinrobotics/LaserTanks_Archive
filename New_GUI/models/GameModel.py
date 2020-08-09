@@ -15,7 +15,7 @@ class GameModel:
         :param **kwargs: Valid kwargs: gameId, startTime, players, type'''
 
         self._gameId : int = kwargs.pop('gameId')
-        self.startTime : time = kwargs.pop('startTime')
+        self.startTime : float = kwargs.pop('startTime')
         self.players : list(PlayerModel) = list(kwargs.pop('players'))
         self.type : IGameType = kwargs.pop('type')
 
