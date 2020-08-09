@@ -22,7 +22,7 @@
 						<tr>
 							<td>
 								<label class="container">
-									<input type="radio" name="Type" value="FFA"><h2>Free For All</h2>
+									<input type="radio" name="Type" value="FFA" required><h2>Free For All</h2>
 								</label>
 							</td>
 							<td>
@@ -46,7 +46,7 @@
 						<tr>
 							<td>
 								<label class="container">
-									<input type="radio" name="Players" value="1"><h2>1</h2>
+									<input type="radio" name="Players" value="1" required><h2>1</h2>
 								</label>
 							</td>
 							<td>
@@ -80,7 +80,10 @@
 		<script>
 			Reveal.initialize({
 				center: true,
-				hash: true,
+				controlsTutorial: true,
+				controlsLayout: 'edges',
+				history: false,
+				hash: false,
 				plugins: [ RevealHighlight ]
 			});
 		</script>
