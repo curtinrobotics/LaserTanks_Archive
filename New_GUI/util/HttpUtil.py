@@ -9,6 +9,6 @@ def validateRequest(request, *args):
             If they don't all exist, a KeyError exception is raised.
     """
     for arg in args:
-        if request.data[str(arg)] == None:
+        if request.form[str(arg)] == None:
             raise KeyError("Key '{arg}' not found :(")
 
