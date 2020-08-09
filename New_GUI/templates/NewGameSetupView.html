@@ -23,10 +23,10 @@
 				<section data-auto-animate data-auto-animate-unmatched="slide">
 					<h1>Set Player Names</h1>
 					{%for ii in range(1, numPlayers + 1) %}
-					<section>
-						<label for={{ "player%d" % ii }}>Enter Player {{ ii }}'s Name</label><br/>
-							<input type="text" name={{"player%d" % ii}} onClick="this.setSelectionRange(0, this.value.length)" value="Player {{ii}}">
-					</section>
+						<section>
+							<label for={{ "player%d" % ii }}>Enter Player {{ ii }}'s Name</label><br/>
+								<input type="text" name={{"player%d" % ii}} onClick="this.setSelectionRange(0, this.value.length)" value="Player {{ii}}">
+						</section>
 					{%endfor%}
 				</section>
 				<section data-auto-animate data-auto-animate-unmatched="slide" class="readonly">
