@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+<title>Laser Tanks</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="/static/dist/reveal.css">
+		<link rel="stylesheet" href="/static/dist/theme/laser.css" id="theme">
+		<link rel="stylesheet" href="/static/plugin/highlight/monokai.css">
+		<style>
+				{{ style }}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<form method="POST" action="/Create-Game" class="slides">
+				<section data-auto-animate data-auto-animate-unmatched="slide">
+					<h1>Set Player Names</h1>
+					{%for ii in range(1, numPlayers + 1) %}
+					<section>
+						<label for={{ "player%d" % ii }}>Enter Player {{ ii }}'s Name</label><br/>
+							<input type="text" name={{"player%d" % ii}} onClick="this.setSelectionRange(0, this.value.length)" value="Player {{ii}}">
+					</section>
+					{%endfor%}
+				</section>
+				<section data-auto-animate data-auto-animate-unmatched="slide" class="readonly">
+					<label for="numPlayers">Number of Players:</label><br>
+					<input type="text" name="numPlayers" value="{{numPlayers}}" readonly><br><br>
+					<label for="type">Game Type:</label><br>
+					<input type="text" name="type" value="{{type}}"><br><br>
+					<input type="submit" value="Start {{type}} Game">
+				</section>
+			</form>
+		</div>
+
+		<script src="/static/dist/reveal.js"></script>
+		<script src="/static/plugin/highlight/highlight.js"></script>
+		<script>
+			Reveal.initialize({
+				center: true,
+				hash: true,
+				controlsTutorial: true,
+				controlsLayout: 'edges',
+				history: false,
+				hash: false,
+				plugins: [ RevealHighlight ]
+			});
+		</script>
+
+	</body>
+</html>

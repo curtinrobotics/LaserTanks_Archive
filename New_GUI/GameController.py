@@ -20,13 +20,13 @@ if True:
 
 @app.route("/")
 def index():
-   return render_template("home.html", style=style)
+   return render_template("HomeView.html", style=style)
 
 @app.route("/New-Game", methods = ['GET'])
 def newGame():
    """Asks for game type and number of players
    so that further details can be obtained in validation"""
-   return render_template("new-game.html", style=style)
+   return render_template("NewGameView.html", style=style)
 
 @app.route("/Setup", methods = ['GET', 'POST'])
 def setup():
@@ -43,11 +43,11 @@ def setup():
    gameType = request.form["Type"]
    numPlayers = int(request.form["Players"])
 
-   return render_template("setup-players.html", numPlayers=numPlayers, style=style, type=gameType)
+   return render_template("NewGameSetupView.html", numPlayers=numPlayers, style=style, type=gameType)
 
 @app.route("/Create-Game", methods = [ 'POST'])
 def createGame():
-   return render_template("Game-View.html")
+   return render_template("GameView.html")
 
 
 def get_ip():
