@@ -108,7 +108,7 @@ class FFA(IGameType):
     def __init__(self, timeLimit: float, stock: int = 3, **kwargs):
         #add params to kwargs
         kwargs["stock"] = stock 
-        kwargs["timeLimit"] = timeimit
+        kwargs["timeLimit"] = timeLimit
 
         #set the win clause
         super.clause = WinClause.TIME
