@@ -19,41 +19,10 @@
 		<div class="reveal">
 
 			<div class="slides">
-				<section data-auto-animate data-auto-animate-unmatched="slide" data-background="static/background1.jpg">
-					<section>
-						<img src="static/LaserTank.png">
-						<h4>Battle Royale</h4>
-					</section>
-					<section>
-						<h1>Credits</h1>
-						<table>
-							<tr>
-								<td>
-									<h3>Project Lead</h3>
-								</td>
-								<td>
-									<h3>GUI Lead</h3>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Adeepa Rajamanthri
-								</td>
-								<td>
-									Ryan Walton
-								</td>
-							</tr>
-						</table>
-					</section>
-				</section>
 				<section data-auto-animate data-auto-animate-unmatched="slide">
-					<style>
-						input[type=submit]:hover input[type=submit]:active {
-							background-color: #fab700;
-    						color: rgb(61, 61, 61);
-						} 
-					</style>
-					<form action="/New-Game" class="nav"><input type="submit" value="New Game"></form>
+					<table>
+						{{game.generateLeaderboard()}}
+					</table>
 				</section>
 			</div>
 
