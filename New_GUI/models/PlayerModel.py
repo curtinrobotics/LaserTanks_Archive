@@ -1,16 +1,13 @@
 from models.game import Powerup
 
 class PlayerModel:
-    def __init__(self, name: str):
-        self.__build(name)
-
     def __init__(self, name: str, **kwargs):
         '''Build the model using kwargs.
         Values default to none.
         :param **kwargs: The list of class values that are set. (e.g.: deaths=5 sets deaths to 5).
         List of used kwargs: kills, deaths, powerups, robotId, playerId'''
 
-        self.__build(name, kwargs)
+        self.__build(name=name, **kwargs)
 
     def __build(self, name:str, **kwargs):
         '''Build the model using kwargs.
@@ -20,16 +17,13 @@ class PlayerModel:
         List of used kwargs: kills, deaths, powerups, robotId, playerId'''
 
         self.name : str = name
-        self.kills : int = kwargs.pop('kills')
-        self.lives : int = kwargs.pop('lives')
-        self.deaths : int = kwargs.pop('deaths')
-        self.powerups : list(Powerup) = list(kwargs.pop('powerups'))
+        self.kills : int = kwargs.get('kills', 0)
+        self.lives : int = kwargs.get('lives', 0)
+        self.deaths : int = kwargs.get('deaths', 0)
+        self.powerups : list[Powerup] = kwargs.get('powerups', list())
         self.timeDied : float = None
-        self.__robotId : int = kwargs.pop('robotId')
-        self.__playerId : int = kwargs.pop('playerId')
-
-        if self._playerId == None:
-            self.__generatePlayerId()
+        self.__robotId : int = kwargs.get('robotId', 0)
+        self.__playerId : int = kwargs.get('playerId', self.__generatePlayerId())
 
     def __generatePlayerId(self):
         self.__playerId = 0
@@ -51,17 +45,20 @@ class PlayerModel:
         return self._robotId == robotId
 
     def generatePlayerHtml(self):
+        score = self.score()
         return '''<td>
                     <h3>{self.name}</h3>
-                    <h4>Score: <b>{self.score()}</b></h4>
+                    <h4>Score: <b>{score}</b></h4>
                     <b>Kills: </b>{self.kills}
                     <b>Deaths: </b>{self.deaths}
                     <h3>Power Ups:</h3>
                         {self.listPowerups()}
                 </td>'''
     
-    def score(self):
-        score = 2 * (self.kills + 1) - self.deaths
+    def score(self) -> int:
+        kills = self.kills
+        deaths = self.deaths
+        score = 2 * (kills + 1) - deaths
         return score
     
     def listPowerups(self):

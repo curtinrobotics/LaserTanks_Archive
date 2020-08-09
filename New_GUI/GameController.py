@@ -49,12 +49,23 @@ def setup():
 
 @app.route("/Create-Game", methods = [ 'POST'])
 def createGame():
-   game = GameModel.GameModel()
+   #get game type
+   gameType = request.form["type"]
+   numPlayers = int(request.form["numPlayers"])
 
-   # build model from request data
-   game.buildFromForm(request)
+   #create players
+   players = list()
 
-   return render_template("GameView.html", game)
+   for ii in range(1, numPlayers + 1):
+      name = str(request.form["player%d" % ii])
+      players.append(PlayerModel.PlayerModel(name))
+
+   #create gameModel
+   game = GameModel.GameModel(startTime=time.time(), players=players, type=gameType)
+
+   leaderboard=game.generateLeaderboard()
+
+   return render_template("GameView.html", leaderboard=leaderboard, style=style)
 
 
 def get_ip():
