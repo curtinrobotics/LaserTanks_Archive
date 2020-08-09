@@ -13,7 +13,8 @@ section.has-light-background, section.has-light-background h1, section.has-light
  * GLOBAL STYLES
  *********************************************/
 :root {
-  --background-color: #191919;
+  --background-colour: #191919;
+  --background-gradient: radial-gradient(circle, rgba(0,0,0,1) 41%, rgba(38,1,1,1) 100%);
   --main-font: Source Sans Pro, Sora-Medium, normal;
   --main-font-size: 42px;
   --main-color: #fff;
@@ -39,8 +40,8 @@ section.has-light-background, section.has-light-background h1, section.has-light
   --control-color: #bd1e1e; }
 
 .reveal-viewport {
-  background: #191919;
-  background-color: #191919; }
+  background: var(--background-colour);
+  background: var(--background-gradient); }
 
 .reveal {
   font-family: "Source Sans Pro", Helvetica, sans-serif;
@@ -288,4 +289,5 @@ section.has-light-background, section.has-light-background h1, section.has-light
  *********************************************/
 @media print {
   .backgrounds {
-    background-color: #010101; } }
+    background: #010101;
+    background: var(--background-gradient); } }
