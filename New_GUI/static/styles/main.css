@@ -1,10 +1,28 @@
 :root {
     --not-selected-color: #bd1e1e;
-    --hover-color: #942a17;
-    --selected-color: #fab069;
+    --hover-color: #eaeaea;
+    --selected-inner-shadow: inset 0px 4px 18px -8px #222;
+    --selected-shadow: 12px 12px 24px -2px #000;
+    --drop-shadow: 24px 24px 24px -2px #000;
+    --selected-color: #ff9900;
+    --dark-text: #444;
 }
 
-.nav input[type=submit] {
+.grid {
+    border-width: 0px;
+    background-color: transparent;
+    border: none transparent;
+    background: none;
+}
+
+.grid tr td {
+    border-width: 0px;
+    background-color: transparent;
+    border: none transparent;
+    background: none;
+}
+
+input[type=submit] {
     background-color: var(--not-selected-color);
     border: none;
     color: white;
@@ -14,32 +32,193 @@
     cursor: pointer;
     font-size: 50px;
     border-radius: 2px;
+    box-shadow: var(--drop-shadow);
 }
-.nav input[type=submit]:hover {
-    background-color: var(--selected-color);
-    color: rgb(61, 61, 61);
+input[type=submit]:hover {
+    background-color: var(--hover-color);
 }
-.nav input[type=submit]:active {
+
+input[type=submit]:active {
     background-color: var(--selected-color);
-    color: rgb(61, 61, 61);
 }
 
 .container input[type=radio] + h2 {
-    color: var(--not-selected-color);
+    color:var(--dark-text);
     font-size: 40px;
+    background-color: white;
+    margin: 4px 2px;
     padding: 16px 32px;
+    border-radius: 2px;
     text-decoration: none;
     margin: 4px 2px;
     cursor: pointer;
+    box-shadow: var(--drop-shadow);
 }
 
 .container input[type=radio]:hover + h2 {
-    text-decoration: underline;
-    color: var(--hover-color);
+    background-color: var(--hover-color);
+    
 }
 
 .container input:checked + h2 {
-    text-decoration: underline;
+    font-weight: 1000;
+    color: var(--dark-text);
+    background-color: var(--selected-color);
+    box-shadow: var(--selected-shadow);
+}
+
+.container input:checked:hover + h2 {
+    font-weight: 1000;
+    color: var(--dark-text);
+    background-color: var(--selected-color);
+    box-shadow: var(--selected-shadow);
+}
+
+input[type=text] {
+    font-size: 50px;
+    text-align: center;
+    border: none transparent;
+    background: transparent;
+    color: #fff;
     font-weight: bold;
+    outline: none;
+}
+
+input[type=text]:focus {
+    font-weight: bolder;
+    text-decoration: underline;
+    text-underline-position: below;
+    border: thick var(--selected-color);
+    border-style: solid;
+    border-color: var(--selected-color);
+    border-top: none transparent;
+    border-left: none transparent;
+    border-right: none transparent;
+    border-bottom: thick;
     color: var(--selected-color);
+}
+
+input[type=submit]:hover input[type=submit]:active {
+    background-color: #fab700;
+    color: rgb(61, 61, 61);
+    box-shadow: var(--drop-shadow);
+}
+
+.readonly input[type=text] {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    font-size: 30px;
+    text-align: center;
+    width: fit-content;
+    border: none transparent;
+    background: transparent;
+    color: #e1e1e1;
+    font-weight: bold;
+    outline: none;
+    text-shadow: var(--drop-shadow);
+}
+
+.readonly input[type=text]:focus {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    font-size: 30px;
+    text-align: center;
+    width: fit-content;
+    text-decoration: none;
+    border: none transparent;
+    background: transparent;
+    color: #e1e1e1;
+    font-weight: bold;
+    outline: none;
+    text-shadow: var(--drop-shadow);
+}
+
+.readonly label {
+    color: #e1e1e1;
+    font-size: 40px;
+    text-shadow: var(--drop-shadow);
+    text-align: center;
+}
+
+/* Below COde altered after being taken from :https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_custom_radio */
+
+
+    /* The container */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-size: 22px;
+    color: var(--not-selected-color);
+    text-align: center;
+    font-family: Impact, Charcoal, sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    }
+    
+    /* Hide the browser's default radio button */
+    .container input[type=radio] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    }
+    
+    /* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    height: 30px;
+    width: 500px;
+    background-color: var(--not-selected-color);
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color:var(--hover-color);
+}
+    
+.container:hover {
+        color: var(--hover-color);
+}
+    
+    .container:has(input:checked) {
+    color: var(--selected-color);
+    }
+    
+    /* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: var(--selected-color);
+}
+    
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+    
+    /* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+    
+    /* Style the indicator (dot/circle) */
+.container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
 }
