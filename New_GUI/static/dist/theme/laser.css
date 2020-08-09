@@ -35,7 +35,8 @@ section.has-light-background, section.has-light-background h1, section.has-light
   --link-color: #ff9900;
   --link-color-hover: #444;
   --selection-background-color: #ff9900;
-  --selection-color: #444; }
+  --selection-color: #444;
+  --control-color: #bd1e1e; }
 
 .reveal-viewport {
   background: #191919;
@@ -239,18 +240,18 @@ section.has-light-background, section.has-light-background h1, section.has-light
  * LINKS
  *********************************************/
 .reveal a {
-  color: #42affa;
+  color: var(--control-color);
   text-decoration: none;
   transition: color .15s ease; }
 
 .reveal a:hover {
-  color: #8dcffc;
+  color: var(--control-color);
   text-shadow: none;
   border: none; }
 
 .reveal .roll span:after {
   color: #fff;
-  background: #068de9; }
+  background: var(--control-color); }
 
 /*********************************************
  * Frame helper
@@ -263,21 +264,24 @@ section.has-light-background, section.has-light-background h1, section.has-light
   transition: all .15s linear; }
 
 .reveal a:hover .r-frame {
-  border-color: #ff9900;
+  border-color: var(--selection-background-color);
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
 
 /*********************************************
  * NAVIGATION CONTROLS
  *********************************************/
 .reveal .controls {
-  color: #bd1e1e; }
+  color: var(--control-color); }
+
+.reveal .controls:hover {
+    color: #923b3b; }
 
 /*********************************************
  * PROGRESS BAR
  *********************************************/
 .reveal .progress {
   background: rgba(0, 0, 0, 0.2);
-  color: #bd1e1e; }
+  color: var(--control-color); }
 
 /*********************************************
  * PRINT BACKGROUND

@@ -8,6 +8,10 @@
     --dark-text: #444;
 }
 
+input {
+    transition: 0.3s;
+}
+
 .grid {
     border-width: 0px;
     background-color: transparent;
@@ -37,7 +41,6 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: var(--hover-color);
 }
-
 input[type=submit]:active {
     background-color: var(--selected-color);
 }
@@ -83,7 +86,10 @@ input[type=text] {
     font-weight: bold;
     outline: none;
 }
-
+input[type=text]::selection {
+    background: black;
+    color: var(--selected-color);
+}
 input[type=text]:focus {
     font-weight: bolder;
     text-decoration: underline;
@@ -119,6 +125,8 @@ input[type=submit]:hover input[type=submit]:active {
     font-weight: bold;
     outline: none;
     text-shadow: var(--drop-shadow);
+    caret-color: transparent;
+    cursor: default;
 }
 
 .readonly input[type=text]:focus {
@@ -137,6 +145,8 @@ input[type=submit]:hover input[type=submit]:active {
     font-weight: bold;
     outline: none;
     text-shadow: var(--drop-shadow);
+    caret-color: transparent;
+    cursor: default;
 }
 
 .readonly label {
