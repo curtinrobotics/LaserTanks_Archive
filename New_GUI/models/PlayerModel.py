@@ -1,13 +1,8 @@
 from models.game import Powerup
 
 class PlayerModel:
-    def __init__(self, name):
-        self.name = name
-        self.kills = 0
-        self.deaths = 0
-        self.powerups = list()
-        self._robotId = 0
-        _generatePlayerId()
+    def __init__(self, name: str):
+        self.__build(name)
 
     def __init__(self, name: str, **kwargs):
         '''Build the model using kwargs.
@@ -29,11 +24,15 @@ class PlayerModel:
         self.lives : int = kwargs.pop('lives')
         self.deaths : int = kwargs.pop('deaths')
         self.powerups : list(Powerup) = list(kwargs.pop('powerups'))
-        self._robotId : int = kwargs.pop('robotId')
-        self._playerId : int = kwargs.pop('playerId')
+        self.timeDied : float = None
+        self.__robotId : int = kwargs.pop('robotId')
+        self.__playerId : int = kwargs.pop('playerId')
 
-    def _generatePlayerId(self):
-        self._playerId = 0
+        if self._playerId == None:
+            self.__generatePlayerId()
+
+    def __generatePlayerId(self):
+        self.__playerId = 0
 
     def shoot(self, player):
         """This player shoots the player passed as an input.
