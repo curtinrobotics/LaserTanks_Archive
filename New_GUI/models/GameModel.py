@@ -1,19 +1,23 @@
 import time
+from models import PlayerModel
+from models.game import Rule
+from models.game.GameTypes import IGameType
+
 
 class GameModel:
     def __init__(self, **kwargs):
         '''Construct from any number of variables.
-        :param **kwargs: Valid kwargs: gameId, startTime, players, rules'''
-        self.build(kwargs)
+        :param **kwargs: Valid kwargs: gameId, startTime, players, type'''
+        self.__build(kwargs)
 
-    def build(self, **kwargs):
+    def __build(self, **kwargs):
         '''Construct from any number of variables.
-        :param **kwargs: Valid kwargs: gameId, startTime, players, rules'''
+        :param **kwargs: Valid kwargs: gameId, startTime, players, type'''
 
-        self._gameId = kwargs.pop('gameId')
-        self.startTime = kwargs.pop('startTime')
-        self.players = kwargs.pop('players')
-        self.rules = kwargs.pop('rules')
+        self._gameId : int = kwargs.pop('gameId')
+        self.startTime : time = kwargs.pop('startTime')
+        self.players : list(PlayerModel) = list(kwargs.pop('players'))
+        self.type : IGameType = kwargs.pop('type')
 
         if self._gameId == None:
             raise NameError

@@ -1,3 +1,5 @@
+from models.game import Powerup
+
 class PlayerModel:
     def __init__(self, name):
         self.name = name
@@ -12,12 +14,23 @@ class PlayerModel:
         Values default to none.
         :param **kwargs: The list of class values that are set. (e.g.: deaths=5 sets deaths to 5).
         List of used kwargs: kills, deaths, powerups, robotId, playerId'''
-        self.name = name
-        self.kills = kwargs.pop('kills')
-        self.deaths = kwargs.pop('deaths')
-        self.powerups = kwargs.pop('powerups')
-        self._robotId = kwargs.pop('robotId')
-        self._playerId = kwargs.pop('playerId')
+
+        self.__build(name, kwargs)
+
+    def __build(self, name:str, **kwargs):
+        '''Build the model using kwargs.
+        Values default to none.
+        :param name: The player's name
+        :param **kwargs: The list of class values that are set. (e.g.: deaths=5 sets deaths to 5).
+        List of used kwargs: kills, deaths, powerups, robotId, playerId'''
+
+        self.name : str = name
+        self.kills : int = kwargs.pop('kills')
+        self.lives : int = kwargs.pop('lives')
+        self.deaths : int = kwargs.pop('deaths')
+        self.powerups : list(Powerup) = list(kwargs.pop('powerups'))
+        self._robotId : int = kwargs.pop('robotId')
+        self._playerId : int = kwargs.pop('playerId')
 
     def _generatePlayerId(self):
         self._playerId = 0
