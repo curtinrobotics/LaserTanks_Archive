@@ -52,12 +52,17 @@ class PlayerModel:
 
     def generatePlayerHtml(self):
         return '''<td>
-                    <h2>{self.name}</h2>
+                    <h3>{self.name}</h3>
+                    <h4>Score: <b>{self.score()}</b></h4>
                     <b>Kills: </b>{self.kills}
                     <b>Deaths: </b>{self.deaths}
                     <h3>Power Ups:</h3>
                         {self.listPowerups()}
                 </td>'''
+    
+    def score(self):
+        score = 2 * (self.kills + 1) - self.deaths
+        return score
     
     def listPowerups(self):
         out = ""
