@@ -1,10 +1,7 @@
 from flask import *
-from FFA_form import *
 import socket
 import os
 import time
-from Function import player
-from services.TemplateService import generateTemplate
 from util.HttpUtil import validateRequest
 from models import GameModel, PlayerModel
 
