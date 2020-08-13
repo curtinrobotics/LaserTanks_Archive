@@ -64,6 +64,10 @@ def createGame():
 
    return render_template("GameView.html", game=game, style=style)
 
+@app.route("/Test", methods = ['GET'])
+def testEndpoint():
+   return "Success!"
+
 
 def get_ip():
    """
