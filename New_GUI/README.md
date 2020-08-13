@@ -8,7 +8,7 @@ This program uses [Flask](https://flask.palletsprojects.com) overlayed with [Rev
 
 You will need to have the following installed on your computer.
 
-* [VS Code](https://code.visualstudio.com/download)
+* [VS Code](https://code.visualstudio.com/download) with the Python extension installed.
 * [Python 3](https://www.python.org/downloads/)
 * [Pip](https://pypi.org/project/pip/)
 
