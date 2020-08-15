@@ -1,14 +1,16 @@
 from flask import *
-kifrom flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit
 import socket
 import os
 import time
 from util.HttpUtil import validateRequest
+
 from models import GameModel, PlayerModel
 
 app = Flask(__name__, static_folder="static")
 app.secret_key = 'development key'
-currentGame : GameModel = GameModel.GameModel()
+
+currentGame = GameModel.GameModel()
 
 style=""
 
@@ -17,8 +19,8 @@ if True:
    style = styleFile.read()
    styleFile.close()
 
-def setGame():
-   currentGame = GameModel.GameModel(startTime=time.time(), players=players, type=gameType)
+def setGame(**kwargs):
+   currentGame = GameModel.GameModel(startTime=time.time(), **kwargs)
    currentGame.sortPlayers()
 
 @app.route("/")
@@ -62,8 +64,7 @@ def createGame():
       players.append(PlayerModel.PlayerModel(name))
 
    #create gameModel
-   setGame(startTime=time.time(), players=players, type=gameType)
-   
+   currentGame = GameModel.GameModel(time=time.time(), players=players, type=gameType)
 
    return render_template("GameView.html", game=currentGame, style=style)
 
@@ -75,8 +76,8 @@ def testEndpoint():
 '''Shoot Enpoint'''
 @app.route('/Game/Shoot/<robotId>', methods=['GET'])
 def shoot(robotId):
-   shooter = currentGame.getPlayer(int(request.form['shooter']))
    shootee = currentGame.getPlayer(int(robotId))
+   shooter = currentGame.getPlayer(int(request.headers['shooter']))
 
    if shooter != None and shootee != None:
       #increment respective players' kills and deaths
@@ -87,7 +88,7 @@ def shoot(robotId):
       deaths = shootee.die()
       currentGame.updatePlayers(shooter, shootee)
 
-      emit('shoot', {'shooter': shooterId, 'shot': robotId, 'kills': kills, 'deaths': deaths})
+      emit('shoot', {'shooter': shooterId, 'shootee': robotId, 'kills': kills, 'deaths': deaths})
 
 
 def get_ip():
@@ -124,4 +125,5 @@ if __name__ == '__main__':
    url_for('static', filename="plugin/highlight/highlight.js")
    url_for('static', filename="LaserTank.png")
 
+   
    app.run(debug=True, host=IP,port=5005)

@@ -5,6 +5,7 @@ from models.game.GameTypes import GameType
 
 
 class GameModel:
+    
     def __init__(self, **kwargs):
         '''Construct from any number of variables.
         :param **kwargs: Valid kwargs: gameId, startTime, players, type'''
@@ -51,7 +52,7 @@ class GameModel:
         return None
 
     def updatePlayers(self, *args : PlayerModel):
-         '''Set each player in this GameModel to those
+        '''Set each player in this GameModel to those
          contained in *args'''
      
         for player in args:

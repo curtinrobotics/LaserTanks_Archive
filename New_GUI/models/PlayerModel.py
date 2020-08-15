@@ -1,6 +1,18 @@
 from models.game import Powerup
+from random import randint
+from app import db
 
 class PlayerModel:
+    self.name : str = name
+    self.kills : int = kwargs.get('kills', 0)
+    self.lives : int = kwargs.get('lives', 0)
+    self.deaths : int = kwargs.get('deaths', 0)
+    self.score = 0
+    self.powerups : list[Powerup] = kwargs.get('powerups', list())
+    self.timeDied : float = None
+    self.__robotId : int = kwargs.get('robotId', self.__generateId())
+    self.__playerId : int = kwargs.get('playerId', self.__generateId())
+
     def __init__(self, name: str, **kwargs):
         '''Build the model using kwargs.
         Values default to none.
@@ -23,11 +35,11 @@ class PlayerModel:
         self.score = 0
         self.powerups : list[Powerup] = kwargs.get('powerups', list())
         self.timeDied : float = None
-        self.__robotId : int = kwargs.get('robotId', 0)
-        self.__playerId : int = kwargs.get('playerId', self.__generatePlayerId())
+        self.__robotId : int = kwargs.get('robotId', self.__generateId())
+        self.__playerId : int = kwargs.get('playerId', self.__generateId())
 
-    def __generatePlayerId(self):
-        self.__playerId = 0
+    def __generateId(self):
+        return randint(1000, 9999)
 
     def shoot(self, player):
         """This player shoots the player passed as an input.

@@ -11,6 +11,38 @@
 		<link rel="stylesheet" href="/static/dist/reveal.css">
 		<link rel="stylesheet" href="/static/dist/theme/laser.css" id="theme">
 		<link rel="stylesheet" href="/static/plugin/highlight/monokai.css">
+		<script type="text/javascript" charset="utf-8">
+			$(document).ready(function() {
+				// Use a "/test" namespace.
+				// An application can open a connection on multiple namespaces, and
+				// Socket.IO will multiplex all those connections on a single
+				// physical channel. If you don't care about multiple channels, you
+				// can set the namespace to an empty string.
+				namespace = '/Game';
+
+				// Connect to the Socket.IO server.
+				// The connection URL has the following format, relative to the current page:
+				//     http[s]://<domain>:<port>[/<namespace>]
+				var socket = io(namespace);
+
+				// Event handler for server sent data.
+				// This updates the kills and deaths of shooter 
+				// and shootee respectively.
+				socket.on('shoot', function(msg, cb) {
+					shooter = '.' + msg.shooter
+					shootee = '.' + msg.shootee
+					
+					$('#' + shooter + ' .kills').empty()
+					$('#' + shooter + ' .kills').append( +$('<div/>').text(msg.kills).html());
+
+					$('#' + shootee + '.deaths').empty()
+					$('#' + shootee + ' .deaths').append( +$('<div/>').text(msg.deaths).html());
+					if (cb)
+						cb();
+				});
+		</script>
+    
+
 		<style>{{style}}</style>
 	</head>
 
@@ -32,7 +64,7 @@
 						<tr>
 							<td><b>Score</b></td>
 							{%for player in game.players%}
-							<td align="center">
+							<td align="center" id="{{player.getId()}}.score">
 								{{player.score}}
 							</td>
 							{%endfor%}
@@ -40,7 +72,7 @@
 						<tr>
 							<td><b>Kills</b></td>
 							{%for player in game.players%}
-							<td align="center">
+							<td align="center" id="{{player.getId()}}.kills">
 								{{player.kills}}
 							</td>
 							{%endfor%}
@@ -48,7 +80,7 @@
 						<tr>
 							<td><b>Deaths</b></td>
 							{%for player in game.players%}
-							<td align="center">
+							<td align="center" id="{{player.getId()}}.deaths">
 								{{player.deaths}}
 							</td>
 							{%endfor%}
