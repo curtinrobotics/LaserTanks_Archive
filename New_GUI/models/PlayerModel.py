@@ -36,7 +36,6 @@ class PlayerModel:
         self.powerups : list[Powerup] = kwargs.get('powerups', list())
         self.timeDied : float = None
         self.__robotId : int = kwargs.get('robotId', self.__generateId())
-        self.__playerId : int = kwargs.get('playerId', self.__generateId())
 
     def __generateId(self):
         return randint(1000, 9999)
