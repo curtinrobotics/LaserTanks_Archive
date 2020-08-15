@@ -49,17 +49,20 @@ class PlayerModel:
         Id
         :param robotId: The robot id to check'''
         return self._robotId == robotId
+    
+    def kill(self):
+        '''Increment this player's kills and return the number'''
+        self.kills += 1
+        return self.kills
 
-    def generatePlayerHtml(self):
-        score = self.score
-        return '''<td>
-                    <h3>{self.name}</h3>
-                    <h4>Score: <b>{score}</b></h4>
-                    <b>Kills: </b>{self.kills}
-                    <b>Deaths: </b>{self.deaths}
-                    <h3>Power Ups:</h3>
-                        {self.listPowerups()}
-                </td>'''
+    def die(self):
+        '''Increment this player's deaths and return the number'''
+        self.deaths += 1
+        return self.deaths
+
+
+    def getId(self):
+        return self.__robotId
     
     def updateScore(self):
         kills = self.kills
@@ -74,4 +77,5 @@ class PlayerModel:
             out = out + '<p>{ii.name}</p>'
         
         return out
+
 
