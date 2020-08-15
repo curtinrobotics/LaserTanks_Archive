@@ -1,4 +1,5 @@
 from flask import *
+kifrom flask_socketio import SocketIO, emit
 import socket
 import os
 import time
@@ -7,6 +8,7 @@ from models import GameModel, PlayerModel
 
 app = Flask(__name__, static_folder="static")
 app.secret_key = 'development key'
+currentGame : GameModel = GameModel.GameModel()
 
 style=""
 
@@ -15,7 +17,9 @@ if True:
    style = styleFile.read()
    styleFile.close()
 
-
+def setGame():
+   currentGame = GameModel.GameModel(startTime=time.time(), players=players, type=gameType)
+   currentGame.sortPlayers()
 
 @app.route("/")
 def index():
@@ -58,15 +62,32 @@ def createGame():
       players.append(PlayerModel.PlayerModel(name))
 
    #create gameModel
-   game = GameModel.GameModel(startTime=time.time(), players=players, type=gameType)
+   setGame(startTime=time.time(), players=players, type=gameType)
+   
 
-   game.sortPlayers()
-
-   return render_template("GameView.html", game=game, style=style)
+   return render_template("GameView.html", game=currentGame, style=style)
 
 @app.route("/Test", methods = ['GET'])
 def testEndpoint():
    return "Success!"
+
+'''Flask Endpoints'''
+'''Shoot Enpoint'''
+@app.route('/Game/Shoot/<robotId>', methods=['GET'])
+def shoot(robotId):
+   shooter = currentGame.getPlayer(int(request.form['shooter']))
+   shootee = currentGame.getPlayer(int(robotId))
+
+   if shooter != None and shootee != None:
+      #increment respective players' kills and deaths
+      #  then update them for the current game and send
+      #  a socket event
+
+      kills = shooter.kill()
+      deaths = shootee.die()
+      currentGame.updatePlayers(shooter, shootee)
+
+      emit('shoot', {'shooter': shooterId, 'shot': robotId, 'kills': kills, 'deaths': deaths})
 
 
 def get_ip():
