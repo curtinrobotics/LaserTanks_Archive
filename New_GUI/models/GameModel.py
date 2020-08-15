@@ -33,7 +33,7 @@ class GameModel:
 
         self.players.sort(reverse=True, key=sortFunc)
     
-    def getPlaceSuffix(place):
+    def getPlaceSuffix(self, place):
             suffix = ''
 
             if place == 1: suffix = 'st'
@@ -42,3 +42,21 @@ class GameModel:
             else: suffix = 'st'
 
             return suffix
+    
+    def getPlayer(self, id: int) -> PlayerModel:
+        for p in self.players:
+            if p.robotIsPlayer(id):
+                return p
+        
+        return None
+
+    def updatePlayers(self, *args : PlayerModel):
+         '''Set each player in this GameModel to those
+         contained in *args'''
+     
+        for player in args:
+            if player != None:
+                for ii in range(len(self.players)):
+                    if self.players[ii].robotIsPlayer(player.getId()):
+                        self.players[ii] = player
+                        break
