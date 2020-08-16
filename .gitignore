@@ -2,3 +2,9 @@ New_GUI/.vscode/settings.json
 New_GUI/.vscode/settings.json
 New_GUI/.vscode/settings.json
 New_GUI/__pycache__/socketsTest.cpython-37.pyc
+New_GUI/__pycache__/__init__.cpython-37.pyc
+New_GUI/__pycache__/GameController.cpython-37.pyc
+New_GUI/models/__pycache__/GameModel.cpython-37.pyc
+New_GUI/test.http
+New_GUI/models/__pycache__/PlayerModel.cpython-37.pyc
+New_GUI/util/__pycache__/JsonUtil.cpython-37.pyc

@@ -1,6 +1,6 @@
 import time
 import random
-from models import PlayerModel
+from models.PlayerModel import PlayerModel
 from models.game.GameTypes import GameType
 import json
 from util.JsonUtil import convert_to_dict, dict_to_obj
@@ -66,12 +66,12 @@ class GameModel:
     
     def serializePlayers(self):
         '''returns a json formatted string containing an array of players in this game'''
-        return convert_to_dict(self.players)
+        return json.dumps(self.players, default=convert_to_dict, indent=2, sort_keys=True)
     
     def deserializePlayers(self, jsonString):
         '''deserialises players from a json string, 
         updates this games players and then returns the new players'''
-        
+
         players = json.loads(jsonString, object_hook=dict_to_obj)
         self.updatePlayers(*players)
 

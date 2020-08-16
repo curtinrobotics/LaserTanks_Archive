@@ -1,4 +1,5 @@
 from flask import *
+from flask import appcontext_pushed, g
 from flask_socketio import SocketIO, emit
 import socket
 import os
@@ -9,8 +10,7 @@ from models import GameModel, PlayerModel
 
 app = Flask(__name__, static_folder="static")
 app.secret_key = 'development key'
-
-currentGame = GameModel.GameModel()
+currentGame : GameModel = None
 
 style=""
 
@@ -64,7 +64,11 @@ def createGame():
       players.append(PlayerModel.PlayerModel(name))
 
    #create gameModel
+   global currentGame
    currentGame = GameModel.GameModel(time=time.time(), players=players, type=gameType)
+
+   #add game model to global vars
+   setattr(g, 'currentGame', currentGame)
 
    return render_template("GameView.html", game=currentGame, style=style)
 
@@ -76,6 +80,8 @@ def testEndpoint():
 '''Shoot Enpoint'''
 @app.route('/Game/Shoot/<robotId>', methods=['GET'])
 def shoot(robotId):
+   global currentGame
+
    shootee = currentGame.getPlayer(int(robotId))
    shooter = currentGame.getPlayer(int(request.headers['shooter']))
 
