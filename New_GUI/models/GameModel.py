@@ -132,7 +132,8 @@ class GameModel:
         html = '''<table class="game"><tr>'''
             
         for player in self.players:
-            html = html + '''<td><div class="rank" id="player{0}"><div><p class="header" id="player{0}"></p></div><br><div><p class="score" id="player{0}"></p></div><br><div><p class="kills" id="player{0}"></p></div><br><div><p class="deaths" id="player{0}"></p></div><br></div></td>'''.format(player.rank)
+            html = html + '''<td><div class="rank" id="player{0}"><div><p class="header" id="player{0}">{1}</p></div><br><div><p class="score" id="player{0}">{2}</p></div><br><div><p class="kills" id="player{0}">{3}</p></div><br><div><p class="deaths" id="player{0}">{4}</p></div><br></div></td>'''.format(
+                player.rank, player.name, player.score, player.kills, player.deaths)
 
         html = html + "</tr></table>"
 

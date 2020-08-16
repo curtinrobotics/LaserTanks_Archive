@@ -39,8 +39,8 @@
 				});
 
 				socket.on('render', function(msg) {
-					$(body).empty();
-					$(body).append(msg.html);
+					$('.leaderboard').empty();
+					$('.leaderboard').append(msg.html);
 				})
 			});
 		</script>
