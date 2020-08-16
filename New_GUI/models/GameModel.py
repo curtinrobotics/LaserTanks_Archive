@@ -76,3 +76,31 @@ class GameModel:
         self.updatePlayers(*players)
 
         return self.players
+
+    def generateLeaderboardHtml(self):
+        #returns a html formatted string for the leaderboard view
+
+        html = '''
+        <table class="game"><tr><td></td>'''
+            
+        for player in self.players:
+            html = html + '''<td align="center" id="{0}"><p class="header">{1}</p></td>'''.format(player.getId(), player.name)
+            
+        html = html + '''</tr><tr><td><b>Score</b></td>'''
+
+        for player in self.players:
+            html = html + '''<td align="center" id="{0}-score">{1}</td>'''.format(player.getId(), player.score)
+
+        html = html + '''</tr><tr><td><b>Kills</b></td>'''
+
+        for player in self.players:
+            html = html + '''<td align="center" id="{0}-kills">{1}</td>'''.format(player.getId(), player.kills)
+        
+        html = html + '''</tr><tr><td><b>Deaths</b></td>'''
+            
+        for player in self.players:
+            html = html + '''<td align="center" id="{0}-deaths">{1}</td>'''.format(player.getId(), player.deaths)
+        
+        html = html + '''</tr></table>'''
+
+        return html

@@ -15,14 +15,17 @@ input {
     transition: 0.3s;
 }
 
+body {
+  background: radial-gradient(circle, rgba(0,0,0,1) 30%, rgba(66,1,1,1) 100%);
+}
+
 .game {
-    position: absolute;
-    top: 10%;
-    left: 10%;
+    position: static;
     vertical-align: middle;
     align-self: center;
     width: 80%;
-    height: 80%;
+    top: calc(50% - attr(height) / 2);
+    padding: 15px;
 }
 
 .header {

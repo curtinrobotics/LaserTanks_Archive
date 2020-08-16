@@ -56,13 +56,16 @@ class PlayerModel:
     def kill(self):
         '''Increment this player's kills and return the number'''
         self.kills += 1
+        self.updateScore()
+
         return self.kills
 
     def die(self):
         '''Increment this player's deaths and return the number'''
         self.deaths += 1
-        return self.deaths
+        self.updateScore()
 
+        return self.deaths
 
     def getId(self):
         return self.__robotId
@@ -71,6 +74,10 @@ class PlayerModel:
         kills = self.kills
         deaths = self.deaths
         score = 2 * (kills + 1) - deaths
+
+        if kills + deaths > 0:
+            score *= 100 + int(25 * (kills / (kills + deaths)))
+        
         self.score = score
     
     def listPowerups(self):
@@ -80,5 +87,3 @@ class PlayerModel:
             out = out + '<p>{ii.name}</p>'
         
         return out
-
-

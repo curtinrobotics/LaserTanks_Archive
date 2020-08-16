@@ -1,18 +1,45 @@
+#!/usr/bin/env python
+from threading import Lock
 from flask import *
 from flask import appcontext_pushed, g
 from flask_socketio import SocketIO, emit
 import socket
 import os
+import sys
 import time
 from util.HttpUtil import validateRequest
+
 
 from models import GameModel, PlayerModel
 
 app = Flask(__name__, static_folder="static")
 app.secret_key = 'development key'
-currentGame : GameModel = None
 
+#global vars
+currentGame : GameModel = None
 style=""
+
+#socket settings
+thread = None
+thread_lock = Lock()
+
+# Set this variable to "threading", "eventlet" or "gevent" to test the
+# different async modes, or leave it set to None for the application to choose
+# the best option based on installed packages.
+async_mode = None
+
+socketio = SocketIO(app, async_mode=async_mode)
+
+def background_thread():
+    """Example of how to send server generated events to clients."""
+    count = 0
+    while True:
+        socketio.sleep(10)
+        count += 1
+        socketio.emit('my_response',
+                      {'data': 'Server generated event', 'count': count},
+                      namespace='/test')
+
 
 if True:
    styleFile = open("static/styles/main.css", "r")
@@ -58,19 +85,18 @@ def createGame():
 
    #create players
    players = list()
+   ids = [8056, 6828, 9321, 2234]
 
    for ii in range(1, numPlayers + 1):
       name = str(request.form["player%d" % ii])
-      players.append(PlayerModel.PlayerModel(name))
+      players.append(PlayerModel.PlayerModel(name, robotId=ids[ii-1]))
 
-   #create gameModel
+   #create gameModel and make it global
    global currentGame
    currentGame = GameModel.GameModel(time=time.time(), players=players, type=gameType)
 
-   #add game model to global vars
-   setattr(g, 'currentGame', currentGame)
 
-   return render_template("GameView.html", game=currentGame, style=style)
+   return render_template("GameView.html", game=currentGame, style=style, async_mode=socketio.async_mode)
 
 @app.route("/Test", methods = ['GET'])
 def testEndpoint():
@@ -82,19 +108,50 @@ def testEndpoint():
 def shoot(robotId):
    global currentGame
 
-   shootee = currentGame.getPlayer(int(robotId))
-   shooter = currentGame.getPlayer(int(request.headers['shooter']))
+   try:
+      shootee = currentGame.getPlayer(int(robotId))
+      shooter = currentGame.getPlayer(int(request.headers['shooter']))
 
-   if shooter != None and shootee != None:
-      #increment respective players' kills and deaths
-      #  then update them for the current game and send
-      #  a socket event
+      if shooter != None and shootee != None:
+         #increment respective players' kills and deaths
+         #  then update them for the current game and send
+         #  a socket event
 
-      kills = shooter.kill()
-      deaths = shootee.die()
-      currentGame.updatePlayers(shooter, shootee)
+         kills = shooter.kill()
+         deaths = shootee.die()
+         currentGame.updatePlayers(shooter, shootee)
 
-      emit('shoot', {'shooter': shooterId, 'shootee': robotId, 'kills': kills, 'deaths': deaths})
+         renderLeaderboard()
+         return jsonify({'shooter': shooter.getId(), 'shootee': shootee.getId(), 'kills': kills, 'deaths': deaths})
+      else:
+         return make_response(jsonify({'error': 'Players not found'}), 404)
+   except NameError as err:
+      return make_response(jsonify({'error': 'No current game instance running'}), 404)
+   except Exception as err:
+      return make_response(jsonify({'unexpected-error': sys.exc_info[0]}), 500)
+   
+@app.errorhandler(404)
+def notFound(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+#Socket Stuff
+@socketio.on('connect', namespace='/Game')
+def connect():
+   global thread
+   with thread_lock:
+      if thread is None:
+         thread = socketio.start_background_task(background_thread)
+   renderLeaderboard()
+
+def renderLeaderboard():
+   global currentGame
+
+   emit('render', {'html': currentGame.generateLeaderboardHtml()}, namespace='/Game', broadcast=True)
+
+@socketio.on('disconnect', namespace='/Game')
+def test_disconnect():
+    print('Client disconnected', request.sid)
+
 
 
 def get_ip():
@@ -132,4 +189,4 @@ if __name__ == '__main__':
    url_for('static', filename="LaserTank.png")
 
    
-   app.run(debug=True, host=IP,port=5005)
+   socketio.run(app, debug=True, host=IP,port=5005)

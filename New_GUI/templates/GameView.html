@@ -4,20 +4,17 @@
 	<head>
 		<meta charset="utf-8">
 
-<title>Laser Tanks</title>
+		<title>Laser Tanks</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="/static/dist/reveal.css">
-		<link rel="stylesheet" href="/static/dist/theme/laser.css" id="theme">
-		<link rel="stylesheet" href="/static/plugin/highlight/monokai.css">
+		<link rel="stylesheet" href={{url_for('static', filename='dist/theme/laser.css')}} id="theme">
+		<link rel="stylesheet" href={{url_for('static', filename="plugin/highlight/monokai.css")}}>
+		 
+		<script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
-				// Use a "/test" namespace.
-				// An application can open a connection on multiple namespaces, and
-				// Socket.IO will multiplex all those connections on a single
-				// physical channel. If you don't care about multiple channels, you
-				// can set the namespace to an empty string.
 				namespace = '/Game';
 
 				// Connect to the Socket.IO server.
@@ -26,20 +23,12 @@
 				var socket = io(namespace);
 
 				// Event handler for server sent data.
-				// This updates the kills and deaths of shooter 
-				// and shootee respectively.
-				socket.on('shoot', function(msg, cb) {
-					shooter = '.' + msg.shooter
-					shootee = '.' + msg.shootee
-					
-					$('#' + shooter + ' .kills').empty()
-					$('#' + shooter + ' .kills').append( +$('<div/>').text(msg.kills).html());
-
-					$('#' + shootee + '.deaths').empty()
-					$('#' + shootee + ' .deaths').append( +$('<div/>').text(msg.deaths).html());
-					if (cb)
-						cb();
+				// This updates the leaderboard
+				socket.on('render', function(msg) {
+					$('#leaderboard').empty();
+					$('#leaderboard').append(msg.html);
 				});
+			});
 		</script>
     
 
@@ -47,63 +36,11 @@
 	</head>
 
 	<body>
-
 		<div class="reveal">
-
 			<div class="slides">
-				<section data-auto-animate data-auto-animate-unmatched="slide">
-					<table class="game">
-						<tr>
-							<td></td>
-							{%for player in game.players%}
-							<td align="center">
-								<p class="header">{{player.name}}</p>
-							</td>
-							{%endfor%}
-						</tr>
-						<tr>
-							<td><b>Score</b></td>
-							{%for player in game.players%}
-							<td align="center" id="{{player.getId()}}.score">
-								{{player.score}}
-							</td>
-							{%endfor%}
-						</tr>
-						<tr>
-							<td><b>Kills</b></td>
-							{%for player in game.players%}
-							<td align="center" id="{{player.getId()}}.kills">
-								{{player.kills}}
-							</td>
-							{%endfor%}
-						</tr>
-						<tr>
-							<td><b>Deaths</b></td>
-							{%for player in game.players%}
-							<td align="center" id="{{player.getId()}}.deaths">
-								{{player.deaths}}
-							</td>
-							{%endfor%}
-						</tr>
-					</table>
+				<section id="leaderboard">
 				</section>
 			</div>
-
 		</div>
-
-		<script src="/static/dist/reveal.js"></script>
-		<script src="/static/plugin/highlight/highlight.js"></script>
-		<script>
-			Reveal.initialize({
-				center: true,
-				loop: true,
-				progress: false,
-				controlsLayout: 'edges',
-				history: false,
-				hash: false,
-				plugins: [ RevealHighlight ]
-			});
-		</script>
-
 	</body>
 </html>
