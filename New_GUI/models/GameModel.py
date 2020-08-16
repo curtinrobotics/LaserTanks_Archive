@@ -125,3 +125,15 @@ class GameModel:
         html = html + '''</tr></table>'''
 
         return html
+        
+    def generateLeaderboardHtml(self):
+        #returns a html formatted string for the leaderboard view
+
+        html = '''<table class="game"><tr>'''
+            
+        for player in self.players:
+            html = html + '''<td><div class="rank" id="player{0}"><div><p class="header" id="player{0}"></p></div><br><div><p class="score" id="player{0}"></p></div><br><div><p class="kills" id="player{0}"></p></div><br><div><p class="deaths" id="player{0}"></p></div><br></div></td>'''.format(player.rank)
+
+        html = html + "</tr></table>"
+
+        return html

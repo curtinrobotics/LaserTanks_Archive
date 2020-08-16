@@ -37,6 +37,11 @@
 						$('p#player${rank}.deaths').text(msg.players[ii].deaths);
 					}
 				});
+
+				socket.on('render', function(msg) {
+					$(body).empty();
+					$(body).append(msg.html);
+				})
 			});
 		</script>
     
@@ -45,65 +50,5 @@
 	</head>
 
 	<body>
-		<table class="leaderboard">
-			<tr>
-				{% if game.numPlayers > 0 %}
-				<td>
-					<div class="rank" id="player1">
-						<div><p class="header" id="player1"></p></div>
-						<br>
-						<div><p class="score" id="player1"></p></div>
-						<br>
-						<div><p class="kills" id="player1"></p></div>
-						<br>
-						<div><p class="deaths" id="player1"></p></div>
-						<br>
-					</div>
-				</td>
-					{% if game.numPlayers > 1 %}
-					<td>
-						<div class="rank" id="player2">
-							<div><p class="header" id="player2"></p></div>
-							<br>
-							<div><p class="score" id="player2"></p></div>
-							<br>
-							<div><p class="kills" id="player2"></p></div>
-							<br>
-							<div><p class="deaths" id="player2"></p></div>
-							<br>
-						</div>
-					</td>
-						{% if game.numPlayers > 2 %}
-						<td>
-							<div class="rank" id="player3">
-								<div><p class="header" id="player3"></p></div>
-								<br>
-								<div><p class="score" id="player3"></p></div>
-								<br>
-								<div><p class="kills" id="player3"></p></div>
-								<br>
-								<div><p class="deaths" id="player3"></p></div>
-								<br>
-							</div>
-						</td>
-							{% if game.numPlayers > 3 %}
-								<td>
-									<div class="rank" id="player4">
-										<div><p class="header" id="player4"></p></div>
-										<br>
-										<div><p class="score" id="player4"></p></div>
-										<br>
-										<div><p class="kills" id="player4"></p></div>
-										<br>
-										<div><p class="deaths" id="player4"></p></div>
-										<br>
-									</div>
-								</td>
-							{%endif%}
-						{%endif%}
-					{%endif%}
-				{%endif%}
-			</tr>
-		</table>
 	</body>
 </html>

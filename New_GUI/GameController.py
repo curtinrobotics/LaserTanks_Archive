@@ -140,7 +140,7 @@ def connect():
    with thread_lock:
       if thread is None:
          thread = socketio.start_background_task(background_thread)
-   sendPlayerData()
+   renderLeaderboard()
 
 def renderLeaderboard():
    global currentGame
