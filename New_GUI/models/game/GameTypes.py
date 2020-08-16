@@ -9,10 +9,11 @@ class WinClause(Enum):
 
 class GameType:
     def __init__(self, **kwargs):
-        self.stock: int = kwargs.get("stock", 0)
+        self.stock: int = kwargs.get("stock", 3)
         self.timeLimit: float = kwargs.get("timeLimit", 0)
         self.maxKills: int = None
-        self.clause: WinClause = kwargs.get("clause")
+        self.clause: WinClause = kwargs.get("clause", WinClause.STOCK)
+        self.name: str = kwargs.get("name", str(self.clause))
         
         if self.clause == None:
             self.get()

@@ -95,7 +95,6 @@ def createGame():
    global currentGame
    currentGame = GameModel.GameModel(time=time.time(), players=players, type=gameType)
 
-
    return render_template("GameView.html", game=currentGame, style=style, async_mode=socketio.async_mode)
 
 @app.route("/Test", methods = ['GET'])
@@ -121,7 +120,7 @@ def shoot(robotId):
          deaths = shootee.die()
          currentGame.updatePlayers(shooter, shootee)
 
-         renderLeaderboard()
+         sendPlayerData()
          return jsonify({'shooter': shooter.getId(), 'shootee': shootee.getId(), 'kills': kills, 'deaths': deaths})
       else:
          return make_response(jsonify({'error': 'Players not found'}), 404)
@@ -141,18 +140,29 @@ def connect():
    with thread_lock:
       if thread is None:
          thread = socketio.start_background_task(background_thread)
-   renderLeaderboard()
+   sendPlayerData()
 
 def renderLeaderboard():
    global currentGame
 
    emit('render', {'html': currentGame.generateLeaderboardHtml()}, namespace='/Game', broadcast=True)
 
-@socketio.on('disconnect', namespace='/Game')
-def test_disconnect():
-    print('Client disconnected', request.sid)
 
+def sendPlayerData():
+   global currentGame
+   if currentGame != None:
+      dictionary = currentGame.getPlayerDictionary()
+      emit('playerData', {'players': dictionary}, namespace='/Game', broadcast=True)
 
+@socketio.on('disconnect_request', namespace='/Game')
+def disconnect_request():
+    @copy_current_request_context
+    def can_disconnect():
+        disconnect()
+
+@socketio.on('response', namespace='/Game')
+def response(message):
+   print(message.data)
 
 def get_ip():
    """

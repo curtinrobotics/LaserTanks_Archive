@@ -12,6 +12,7 @@ class GameModel:
         '''Construct from any number of variables.
         :param **kwargs: Valid kwargs: gameId, startTime, players, type'''
         self.__build(**kwargs)
+        self.sortPlayers()
 
     def __build(self, **kwargs):
         '''Construct from any number of variables.
@@ -20,7 +21,8 @@ class GameModel:
         self.__gameId : int = kwargs.get('gameId', self.__generateId(kwargs.get("gameService")))
         self.startTime : float = kwargs.get('startTime', time.time())
         self.players : list[PlayerModel] = kwargs.get('players', list())
-        self.type : GameType = kwargs.get('type', GameType())
+        self.type : str = kwargs.get('type', 'FFA')
+        self.numPlayers = len(self.players)
 
     def __generateId(self, gameService):
         if gameService == None:
@@ -35,6 +37,24 @@ class GameModel:
             return player.score
 
         self.players.sort(reverse=True, key=sortFunc)
+
+        for ii in range(len(self.players)):
+            self.players[ii].rank = ii + 1
+
+    def getPlayerDictionary(self):
+        players = list()
+
+        for player in self.players:
+            players.append({
+                'name': player.name,
+                'score': player.score, 
+                'kills': player.kills,
+                'deaths': player.deaths,
+                'lives': player.lives,
+                'rank': player.rank
+                })
+        
+        return players
     
     def getPlaceSuffix(self, place):
             suffix = ''
@@ -62,6 +82,7 @@ class GameModel:
                 for ii in range(len(self.players)):
                     if self.players[ii].robotIsPlayer(player.getId()):
                         self.players[ii] = player
+                        self.sortPlayers()
                         break
     
     def serializePlayers(self):

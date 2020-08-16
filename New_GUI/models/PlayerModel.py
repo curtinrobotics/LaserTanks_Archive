@@ -24,6 +24,7 @@ class PlayerModel:
         self.score = 0
         self.powerups : list[Powerup] = kwargs.get('powerups', list())
         self.timeDied : float = None
+        self.rank : int = kwargs.get('rank', 0)
         self.__robotId : int = kwargs.get('robotId', self.__generateId())
 
     def __generateId(self):
@@ -69,6 +70,21 @@ class PlayerModel:
 
     def getId(self):
         return self.__robotId
+
+    def getRankString(self):
+        rank = self.rank
+        s = ""
+
+        if rank == 1:
+            s = "1st"
+        elif rank == 2:
+            s = "2nd"
+        elif rank == 3:
+            s = "3rd"
+        else:
+            s = str(rank) + "th"
+        
+        return s
     
     def updateScore(self):
         kills = self.kills

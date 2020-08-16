@@ -11,6 +11,75 @@
     --table-font-size:40px;
 }
 
+.leaderboard {
+    width: fit-content;
+    align-self: center;
+    align-content: center;
+}
+
+.leaderboard tr td div {
+    color: white;
+}
+
+.leaderboard tr td #player1 {
+    border: 5px solid transparent;
+    padding: .5rem;
+    border-image-source: linear-gradient(to bottom right, #e9d525 0%, rgb(177, 165, 60) 100%); 
+    border-image-slice: 5;
+
+    background-image: linear-gradient(to top left, #e9d525 0%, rgb(177, 165, 60) 100%);
+}
+
+#player1.header,
+#player1.score,
+#player1.kills,
+#player1.deaths {
+    font-size: 40px;
+    background: -webkit-linear-gradient( #8a7c00, rgb(124, 108, 38));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.leaderboard tr td #player2 {
+    border: 5px solid transparent;
+    padding: .5rem;
+    border-image-source: linear-gradient(to bottom right, #d6d6d6 0%, #969592 100%); 
+    border-image-slice: 5;
+    background-image: linear-gradient(to top left, #d6d6d6 0%, #969592 100%);
+}
+
+#player2.header,
+#player2.score,
+#player2.kills,
+#player2.deaths {
+    font-size: 40px;
+    background: -webkit-linear-gradient( #070707, #3a3a36);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.leaderboard tr td #player3 {
+    border: 5px solid transparent;
+    padding: .5rem;
+    border-image-source: linear-gradient(to bottom right, #e28813f8 0%, #a3630e 100%); 
+    border-image-slice: 5;
+    background-image: linear-gradient(to top left, #e28813f8 0%, #a3630e 100%);
+
+}
+
+#player3.header,
+#player3.score,
+p#player3.kills,
+p#player3.deaths {
+    font-size: 40px;
+    background: -webkit-linear-gradient( #070707, #3a3a36);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border: none;
+}
+
+
+
 input {
     transition: 0.3s;
 }

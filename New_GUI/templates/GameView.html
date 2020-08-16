@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Laser Tanks</title>
+		<title>{{game.type}} Game | Laser Tanks</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
@@ -22,11 +22,20 @@
 				//     http[s]://<domain>:<port>[/<namespace>]
 				var socket = io(namespace);
 
-				// Event handler for server sent data.
-				// This updates the leaderboard
-				socket.on('render', function(msg) {
-					$('#leaderboard').empty();
-					$('#leaderboard').append(msg.html);
+
+				socket.on('playerData', function(msg) {
+					var ii;
+					socket.emit('response', {'data': msg.players})
+
+					for(ii = 0; ii < msg.players.length; ii++) {
+						var rank = msg.players[ii].rank;
+
+						console.log('#player${rank}.header');
+						$('p#player1.header').append(msg.players[0].name);
+						$('p#player1.score').text(msg.players[0].score);
+						$('p#player${rank}.kills').text(msg.players[ii].kills);
+						$('p#player${rank}.deaths').text(msg.players[ii].deaths);
+					}
 				});
 			});
 		</script>
@@ -36,11 +45,65 @@
 	</head>
 
 	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section id="leaderboard">
-				</section>
-			</div>
-		</div>
+		<table class="leaderboard">
+			<tr>
+				{% if game.numPlayers > 0 %}
+				<td>
+					<div class="rank" id="player1">
+						<div><p class="header" id="player1"></p></div>
+						<br>
+						<div><p class="score" id="player1"></p></div>
+						<br>
+						<div><p class="kills" id="player1"></p></div>
+						<br>
+						<div><p class="deaths" id="player1"></p></div>
+						<br>
+					</div>
+				</td>
+					{% if game.numPlayers > 1 %}
+					<td>
+						<div class="rank" id="player2">
+							<div><p class="header" id="player2"></p></div>
+							<br>
+							<div><p class="score" id="player2"></p></div>
+							<br>
+							<div><p class="kills" id="player2"></p></div>
+							<br>
+							<div><p class="deaths" id="player2"></p></div>
+							<br>
+						</div>
+					</td>
+						{% if game.numPlayers > 2 %}
+						<td>
+							<div class="rank" id="player3">
+								<div><p class="header" id="player3"></p></div>
+								<br>
+								<div><p class="score" id="player3"></p></div>
+								<br>
+								<div><p class="kills" id="player3"></p></div>
+								<br>
+								<div><p class="deaths" id="player3"></p></div>
+								<br>
+							</div>
+						</td>
+							{% if game.numPlayers > 3 %}
+								<td>
+									<div class="rank" id="player4">
+										<div><p class="header" id="player4"></p></div>
+										<br>
+										<div><p class="score" id="player4"></p></div>
+										<br>
+										<div><p class="kills" id="player4"></p></div>
+										<br>
+										<div><p class="deaths" id="player4"></p></div>
+										<br>
+									</div>
+								</td>
+							{%endif%}
+						{%endif%}
+					{%endif%}
+				{%endif%}
+			</tr>
+		</table>
 	</body>
 </html>
