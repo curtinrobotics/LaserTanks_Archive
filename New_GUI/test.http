@@ -1,3 +1,8 @@
 
-GET http://127.0.0.1:5000/Game/Shoot/7923
-Shooter: 7277
+@player1 = 8056
+@player2 = 6828
+@player3 = 9321
+@player4 = 2234
+
+GET http://127.0.0.1:5000/Game/Shoot/{{player1}}
+Shooter: {{player2}}
