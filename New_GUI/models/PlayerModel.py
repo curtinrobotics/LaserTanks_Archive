@@ -95,7 +95,7 @@ class PlayerModel:
             score = 3 * kills - deaths
 
             if kills + deaths > 0:
-                score *= 100 + int(40 * (kills / (kills + deaths)))
+                score *= 100 + int(40 * (kills / (kills + deaths) - (deaths - kills) / kills))
         
         if score < 0:
             score = 0
