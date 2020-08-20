@@ -9,25 +9,50 @@
     --radio-font-size: 40px;
     --table-header-font-size:50px;
     --table-font-size:40px;
+
+    --gold: #e9d500;
+    --dark-gold:rgb(177, 165, 00);
 }
 
 .leaderboard {
     width: fit-content;
     align-self: center;
     align-content: center;
+
+    /*Code from https://stackoverflow.com/questions/3053205/how-create-table-only-using-div-tag-and-css */
+    display: table-row;         
+    width: auto;         
+    background-color: #eee;         
+    border: 1px solid #666666;         
+    border-spacing: 5px; /* cellspacing:poor IE support for  this */
+    clear: both;
 }
 
-.leaderboard tr td div {
-    color: white;
+.div-table-row {
+    display: table-row;
+    width: auto;
+    clear: both;
+  }
+
+.board {
+    min-width: 80px;
+    width: 200px;
+    margin-left: -100px;
+
+    /*from https://stackoverflow.com/questions/3053205/how-create-table-only-using-div-tag-and-css*/
+    float: left; /* fix for  buggy browsers */
+    display: table-column;         
+    width: 200px;         
+    background-color: #ccc; 
 }
 
-.leaderboard tr td #player1 {
+#player1.board {
     border: 5px solid transparent;
     padding: .5rem;
-    border-image-source: linear-gradient(to bottom right, #e9d525 0%, rgb(177, 165, 60) 100%); 
+    border-image-source: linear-gradient(to top left, #e9d500 0%, rgb(177, 165, 00) 100%); 
     border-image-slice: 5;
 
-    background-image: linear-gradient(to top left, #e9d525 0%, rgb(177, 165, 60) 100%);
+    background-image: linear-gradient(to bottom right, #e9d500 0%, rgb(177, 165, 00) 100%);
 }
 
 #player1.header,
@@ -35,12 +60,24 @@
 #player1.kills,
 #player1.deaths {
     font-size: 40px;
-    background: -webkit-linear-gradient( #8a7c00, rgb(124, 108, 38));
+    background: -webkit-linear-gradient( #8a8800, rgb(124, 108, 0));
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #444;
 }
 
-.leaderboard tr td #player2 {
+.header,
+.score,
+.kills,
+.deaths {
+    border: none;
+    border-width: 0cm;
+    border-color: transparent;
+
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+#player2.board {
     border: 5px solid transparent;
     padding: .5rem;
     border-image-source: linear-gradient(to bottom right, #d6d6d6 0%, #969592 100%); 
@@ -55,10 +92,10 @@
     font-size: 40px;
     background: -webkit-linear-gradient( #070707, #3a3a36);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #444;
 }
 
-.leaderboard tr td #player3 {
+#player3.board {
     border: 5px solid transparent;
     padding: .5rem;
     border-image-source: linear-gradient(to bottom right, #e28813f8 0%, #a3630e 100%); 
@@ -69,15 +106,22 @@
 
 #player3.header,
 #player3.score,
-p#player3.kills,
-p#player3.deaths {
+#player3.kills,
+#player3.deaths {
     font-size: 40px;
     background: -webkit-linear-gradient( #070707, #3a3a36);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #444;
     border: none;
+    border-color: transparent;
 }
 
+#player4 {
+    color: white;
+    background-color: transparent;
+    background: none;
+    font-size: 40px;
+}
 
 
 input {
