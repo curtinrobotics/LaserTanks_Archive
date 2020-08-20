@@ -75,15 +75,40 @@ class GameModel:
 
     def updatePlayers(self, *args : PlayerModel):
         '''Set each player in this GameModel to those
-         contained in *args'''
-     
-        for player in args:
-            if player != None:
-                for ii in range(len(self.players)):
-                    if self.players[ii].robotIsPlayer(player.getId()):
-                        self.players[ii] = player
-                        self.sortPlayers()
-                        break
+         contained in *args,
+        Then update all players' ranks'''
+
+        #set players to those in args
+        if args != None:
+            for player in args:
+                if player != None:
+                    for ii in range(len(self.players)):
+                        if self.players[ii].robotIsPlayer(player.getId()):
+                            player.updateScore()
+                            self.players[ii] = player
+                            break
+        
+        self.sortPlayers()
+
+        #update rank
+        for ii in range(self.numPlayers):
+            score = self.players[ii].score
+            rank = 4
+
+            if score > 0:
+                if ii > 0 and ii < 3:
+                    #check if this player is tied with the previous
+                    if score == self.players[ii-1].score:
+                        rank = ii
+                    else:
+                        rank = ii + 1
+                else:
+                    rank = 1
+            
+            self.players[ii].rank = rank
+            
+
+
     
     def serializePlayers(self):
         '''returns a json formatted string containing an array of players in this game'''
@@ -100,9 +125,9 @@ class GameModel:
 
     def generateLeaderboardHtml(self):
         #returns a html formatted string for the leaderboard view
-
+        
         html = '''
-        <table class="game"><tr><td></td>'''
+        <table class="game" ><tr><td></td>'''
             
         for player in self.players:
             html = html + '''<td align="center" id="{0}"><p class="header">{1}</p></td>'''.format(player.getId(), player.name)
@@ -129,12 +154,25 @@ class GameModel:
     def generateLeaderboardHtml(self):
         #returns a html formatted string for the leaderboard view
 
-        html = '''<table class="game"><tr>'''
+        html = ""
             
         for player in self.players:
-            html = html + '''<td><div class="rank" id="player{0}"><div><p class="header" id="player{0}">{1}</p></div><br><div><p class="score" id="player{0}">{2}</p></div><br><div><p class="kills" id="player{0}">{3}</p></div><br><div><p class="deaths" id="player{0}">{4}</p></div><br></div></td>'''.format(
-                player.rank, player.name, player.score, player.kills, player.deaths)
+            position = self.getPlayerDivPosition(player)
 
-        html = html + "</tr></table>"
+            html = html + '''<div class="board" id="player{0}" style="position: absolute;left: {5}%;top:45px;"><p class="header" id="player{0}">{1}</p><p class="score" id="player{0}">{2}</p><p class="kills" id="player{0}">{3}</p><p class="deaths" id="player{0}">{4}</p></div>'''.format(
+                player.rank, player.name, player.score, player.kills, player.deaths,
+                position) #last arg is the position in %)
+
 
         return html
+    
+    def getPlayerDivPosition(self, player):
+        position = 0
+        rank = player.rank
+
+        if player.rank > self.numPlayers:
+            rank = self.players.index(player) + 1
+
+        position = 100 * (rank / (self.numPlayers + 1))
+
+        return position
