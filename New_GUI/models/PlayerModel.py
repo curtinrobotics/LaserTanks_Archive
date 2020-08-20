@@ -88,11 +88,14 @@ class PlayerModel:
     
     def updateScore(self):
         kills = self.kills
-        deaths = self.deaths
-        score = 2 * (kills + 1) - deaths
+        score = 0
 
-        if kills + deaths > 0:
-            score *= 100 + int(25 * (kills / (kills + deaths)))
+        if kills > 0 :
+            deaths = self.deaths
+            score = 2 * kills - deaths
+
+            if kills + deaths > 0:
+                score *= 100 + int(25 * (kills / (kills + deaths)))
         
         self.score = score
     
