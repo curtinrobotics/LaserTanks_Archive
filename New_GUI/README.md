@@ -109,7 +109,7 @@ Copy and paste the below text into the automatically generated file in VS Code.
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "New_GUI/GUI_main.py",
+                "FLASK_APP": "New_GUI/GameController.py",
                 "FLASK_ENV": "development",
                 "FLASK_DEBUG": "0"
             },
