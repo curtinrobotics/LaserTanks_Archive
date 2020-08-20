@@ -92,10 +92,13 @@ class PlayerModel:
 
         if kills > 0 :
             deaths = self.deaths
-            score = 2 * kills - deaths
+            score = 3 * kills - deaths
 
             if kills + deaths > 0:
-                score *= 100 + int(25 * (kills / (kills + deaths)))
+                score *= 100 + int(40 * (kills / (kills + deaths)))
+        
+        if score < 0:
+            score = 0
         
         self.score = score
     
