@@ -120,7 +120,7 @@ def shoot(robotId):
          deaths = shootee.die()
          currentGame.updatePlayers(shooter, shootee)
 
-         sendPlayerData()
+         renderLeaderboard()
          return jsonify({'shooter': shooter.getId(), 'shootee': shootee.getId(), 'kills': kills, 'deaths': deaths})
       else:
          return make_response(jsonify({'error': 'Players not found'}), 404)
@@ -144,6 +144,7 @@ def connect():
 
 def renderLeaderboard():
    global currentGame
+   currentGame.updatePlayers()
 
    emit('render', {'html': currentGame.generateLeaderboardHtml()}, namespace='/Game', broadcast=True)
 
@@ -153,6 +154,18 @@ def sendPlayerData():
    if currentGame != None:
       dictionary = currentGame.getPlayerDictionary()
       emit('playerData', {'players': dictionary}, namespace='/Game', broadcast=True)
+
+def sendGameData():
+   global currentGame
+   if currentGame != None:
+      emit('gameData', json.dumps({
+            'game': 
+            { 
+               'numPlayers': currentGame.numPlayers,
+               'gameTime': currentGame.timeElapsed(),
+               'players': currentGame.getPlayerDictionary()
+            }
+         }), namespace='/Game', broadcast=True)
 
 @socketio.on('disconnect_request', namespace='/Game')
 def disconnect_request():
