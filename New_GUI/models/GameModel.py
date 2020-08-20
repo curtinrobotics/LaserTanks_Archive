@@ -12,7 +12,7 @@ class GameModel:
         '''Construct from any number of variables.
         :param **kwargs: Valid kwargs: gameId, startTime, players, type'''
         self.__build(**kwargs)
-        self.sortPlayers()
+        self.updatePlayers()
 
     def __build(self, **kwargs):
         '''Construct from any number of variables.
@@ -37,9 +37,6 @@ class GameModel:
             return player.score
 
         self.players.sort(reverse=True, key=sortFunc)
-
-        for ii in range(len(self.players)):
-            self.players[ii].rank = ii + 1
 
     def getPlayerDictionary(self):
         players = list()
@@ -89,21 +86,21 @@ class GameModel:
                             break
         
         self.sortPlayers()
+        self.updateRank()
 
+    def updateRank(self):
         #update rank
         for ii in range(self.numPlayers):
             score = self.players[ii].score
             rank = 4
 
             if score > 0:
+                rank = ii + 1
+
                 if ii > 0 and ii < 3:
                     #check if this player is tied with the previous
                     if score == self.players[ii-1].score:
                         rank = ii
-                    else:
-                        rank = ii + 1
-                else:
-                    rank = 1
             
             self.players[ii].rank = rank
             
@@ -122,34 +119,6 @@ class GameModel:
         self.updatePlayers(*players)
 
         return self.players
-
-    def generateLeaderboardHtml(self):
-        #returns a html formatted string for the leaderboard view
-        
-        html = '''
-        <table class="game" ><tr><td></td>'''
-            
-        for player in self.players:
-            html = html + '''<td align="center" id="{0}"><p class="header">{1}</p></td>'''.format(player.getId(), player.name)
-            
-        html = html + '''</tr><tr><td><b>Score</b></td>'''
-
-        for player in self.players:
-            html = html + '''<td align="center" id="{0}-score">{1}</td>'''.format(player.getId(), player.score)
-
-        html = html + '''</tr><tr><td><b>Kills</b></td>'''
-
-        for player in self.players:
-            html = html + '''<td align="center" id="{0}-kills">{1}</td>'''.format(player.getId(), player.kills)
-        
-        html = html + '''</tr><tr><td><b>Deaths</b></td>'''
-            
-        for player in self.players:
-            html = html + '''<td align="center" id="{0}-deaths">{1}</td>'''.format(player.getId(), player.deaths)
-        
-        html = html + '''</tr></table>'''
-
-        return html
         
     def generateLeaderboardHtml(self):
         #returns a html formatted string for the leaderboard view
@@ -159,7 +128,7 @@ class GameModel:
         for player in self.players:
             position = self.getPlayerDivPosition(player)
 
-            html = html + '''<div class="board" id="player{0}" style="position: absolute;left: {5}%;top:45px;"><p class="header" id="player{0}">{1}</p><p class="score" id="player{0}">{2}</p><p class="kills" id="player{0}">{3}</p><p class="deaths" id="player{0}">{4}</p></div>'''.format(
+            html = html + '''<div class="board" id="player{0}" style="position: absolute;left: {5}%;"><p class="header" id="player{0}">{1}</p><p class="score" id="player{0}">{2}</p><p class="kills" id="player{0}">{3}</p><p class="deaths" id="player{0}">{4}</p></div>'''.format(
                 player.rank, player.name, player.score, player.kills, player.deaths,
                 position) #last arg is the position in %)
 
@@ -167,12 +136,7 @@ class GameModel:
         return html
     
     def getPlayerDivPosition(self, player):
-        position = 0
-        rank = player.rank
+        self.sortPlayers()
+        index = self.players.index(player) + 1
 
-        if player.rank > self.numPlayers:
-            rank = self.players.index(player) + 1
-
-        position = 100 * (rank / (self.numPlayers + 1))
-
-        return position
+        return 100 * (index / (self.numPlayers + 1))
