@@ -7,41 +7,47 @@
 		<title>{{game.type}} Game | Laser Tanks</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-		<link rel="stylesheet" href={{url_for('static', filename='dist/theme/laser.css')}} id="theme">
-		<link rel="stylesheet" href={{url_for('static', filename="plugin/highlight/monokai.css")}}>
 		 
 		<script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
 		<script type="text/javascript" charset="utf-8">
+			var socket;
+
 			$(document).ready(function() {
 				namespace = '/Game';
 
 				// Connect to the Socket.IO server.
 				// The connection URL has the following format, relative to the current page:
 				//     http[s]://<domain>:<port>[/<namespace>]
-				var socket = io(namespace);
-
-
-				socket.on('playerData', function(msg) {
-					var ii;
-					socket.emit('response', {'data': msg.players})
-
-					for(ii = 0; ii < msg.players.length; ii++) {
-						var rank = msg.players[ii].rank;
-
-						console.log('#player${rank}.header');
-						$('p#player1.header').append(msg.players[0].name);
-						$('p#player1.score').text(msg.players[0].score);
-						$('p#player${rank}.kills').text(msg.players[ii].kills);
-						$('p#player${rank}.deaths').text(msg.players[ii].deaths);
-					}
-				});
+				socket = io(namespace);
 
 				socket.on('render', function(msg) {
 					$('.leaderboard').empty();
 					$('.leaderboard').append(msg.html);
-				})
+				});
+			});
+
+
+			socket.on('gameData', function(msg) {
+				var ii;
+				var numPlayers = msg.game.numPlayers
+				socket.emit('response', {'data': msg.game.players})
+				
+				for(ii = 0; ii < numPlayers; ii++) {
+					var rank = msg.players[ii].rank;
+
+					//update leaderboard fields
+					$('#player${rank}.header').text(msg.players[ii].name);
+					$('#player${rank}.score').text(msg.players[ii].score);
+					$('#player${rank}.kills').text(msg.players[ii].kills);
+					$('#player${rank}.deaths').text(msg.players[ii].deaths);
+
+					//change position
+					var pos = 100 * (rank / numPlayers) - 200;
+
+					$('#player${rank}').animate(
+						{left: "${pos}%"}, 700);
+				}
 			});
 		</script>
     
@@ -50,6 +56,6 @@
 	</head>
 
 	<body>
-		<div class="leaderboard"></div>
+	<div class="leaderboard"></div>
 	</body>
 </html>
