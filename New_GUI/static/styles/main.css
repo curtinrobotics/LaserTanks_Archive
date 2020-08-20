@@ -11,7 +11,11 @@
     --table-font-size:40px;
 
     --gold: #e9d500;
-    --dark-gold:rgb(177, 165, 00);
+    --dark-gold:rgb(112, 105, 0);
+    --silver: #d6d6d6;
+    --dark-silver: #494947;
+    --bronze: #e28813f8;
+    --dark-bronze: #584831;
 }
 
 .leaderboard {
@@ -23,7 +27,7 @@
     display: table-row;         
     width: auto;         
     background-color: #eee;         
-    border: 1px solid #666666;         
+    border: 1px solid var(--dark-silver);         
     border-spacing: 5px; /* cellspacing:poor IE support for  this */
     clear: both;
 }
@@ -43,27 +47,24 @@
     float: left; /* fix for  buggy browsers */
     display: table-column;         
     width: 200px;         
-    background-color: #ccc; 
+    background-color: #ccc;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    resize: vertical;
+    overflow: auto;
 }
 
 #player1.board {
     border: 5px solid transparent;
     padding: .5rem;
-    border-image-source: linear-gradient(to top left, #e9d500 0%, rgb(177, 165, 00) 100%); 
+    border-image-source: linear-gradient(to top left, var(--gold) 0%,var(--dark-gold) 100%); 
     border-image-slice: 5;
 
-    background-image: linear-gradient(to bottom right, #e9d500 0%, rgb(177, 165, 00) 100%);
+    background-image: linear-gradient(to bottom right, var(--gold) 0%, var(--dark-gold) 100%);
 }
 
-#player1.header,
-#player1.score,
-#player1.kills,
-#player1.deaths {
-    font-size: 40px;
-    background: -webkit-linear-gradient( #8a8800, rgb(124, 108, 0));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: #444;
-}
 
 .header,
 .score,
@@ -74,15 +75,16 @@
     border-color: transparent;
 
     text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 40px;
 }
 
 #player2.board {
     border: 5px solid transparent;
     padding: .5rem;
-    border-image-source: linear-gradient(to bottom right, #d6d6d6 0%, #969592 100%); 
+    border-image-source: linear-gradient(to bottom right, var(--silver) 0%, var(--dark-silver) 100%); 
     border-image-slice: 5;
-    background-image: linear-gradient(to top left, #d6d6d6 0%, #969592 100%);
+    background-image: linear-gradient(to top left, var(--silver) 0%, var(--dark-silver) 100%);
 }
 
 #player2.header,
@@ -98,9 +100,9 @@
 #player3.board {
     border: 5px solid transparent;
     padding: .5rem;
-    border-image-source: linear-gradient(to bottom right, #e28813f8 0%, #a3630e 100%); 
+    border-image-source: linear-gradient(to bottom right, var(--bronze) 0%, var(--dark-bronze) 100%); 
     border-image-slice: 5;
-    background-image: linear-gradient(to top left, #e28813f8 0%, #a3630e 100%);
+    background-image: linear-gradient(to top left, var(--bronze) 0%, var(--dark-bronze) 100%);
 
 }
 
