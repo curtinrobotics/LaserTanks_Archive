@@ -128,9 +128,22 @@ class GameModel:
         for player in self.players:
             position = self.getPlayerDivPosition(player)
 
-            html = html + '''<div class="board" id="player{0}" style="position: absolute;left: {5}%;"><p class="header" id="player{0}">{1}</p><p class="score" id="player{0}">{2}</p><p class="kills" id="player{0}">{3}</p><p class="deaths" id="player{0}">{4}</p></div>'''.format(
-                player.rank, player.name, player.score, player.kills, player.deaths,
-                position) #last arg is the position in %)
+            html = html + """
+                <div class="board" id="player{0}" style="position: absolute;left: {5}%;">
+                    <div class="header" id="player{0}">{1}</div>
+                    
+                    <h2 id="player{0}" class="depth">Score</h2>
+                    <p class="score" id="player{0}">{2}</p>
+                    
+                    <h2 id="player{0}" class="depth">Kills</h2>
+                    <p class="kills" id="player{0}">{3}</p>
+                    
+                    <h2 id="player{0}" class="depth">Deaths</h2>
+                    <p class="deaths" id="player{0}">{4}</p>
+                </div>""".format(player.rank, player.name, player.score, player.kills,
+                player.deaths, position)
+                
+        html = html.replace("\n", "").replace("\r", "").replace("    ", "")
 
 
         return html
