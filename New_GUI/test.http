@@ -4,5 +4,5 @@
 @player3 = 9321
 @player4 = 2234
 
-GET http://127.0.0.1:5000/Game/Shoot/{{player1}}
+GET http://127.0.0.1:5000/Game/Shoot/{{player4}}
 Shooter: {{player2}}

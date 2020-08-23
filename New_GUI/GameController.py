@@ -95,7 +95,6 @@ def createGame():
    global currentGame
    currentGame = GameModel.GameModel(time=time.time(), players=players, type=gameType)
 
-
    return render_template("GameView.html", game=currentGame, style=style, async_mode=socketio.async_mode)
 
 @app.route("/Test", methods = ['GET'])
@@ -108,10 +107,13 @@ def testEndpoint():
 def shoot(robotId):
    global currentGame
 
+   if int(robotId) == int(request.headers['shooter']):
+      return make_response(jsonify({'error': 'A tank cannot shoot itself'}), 403)
+
    try:
       shootee = currentGame.getPlayer(int(robotId))
       shooter = currentGame.getPlayer(int(request.headers['shooter']))
-
+      
       if shooter != None and shootee != None:
          #increment respective players' kills and deaths
          #  then update them for the current game and send
@@ -124,7 +126,15 @@ def shoot(robotId):
          renderLeaderboard()
          return jsonify({'shooter': shooter.getId(), 'shootee': shootee.getId(), 'kills': kills, 'deaths': deaths})
       else:
-         return make_response(jsonify({'error': 'Players not found'}), 404)
+         #error msg
+         notFound = "("
+         if shooter == None:
+            notFound = notFound + str(int(request.headers['shooter'])) + ','
+         if shootee == None:
+            notFound = notFound + str(int(request.headers['shooter']))
+         notFound = notFound + ")"
+
+         return make_response(jsonify({'error': 'Players {0} not found'.format(notFound)}), 404)
    except NameError as err:
       return make_response(jsonify({'error': 'No current game instance running'}), 404)
    except Exception as err:
@@ -145,14 +155,38 @@ def connect():
 
 def renderLeaderboard():
    global currentGame
+   currentGame.updatePlayers()
 
    emit('render', {'html': currentGame.generateLeaderboardHtml()}, namespace='/Game', broadcast=True)
 
-@socketio.on('disconnect', namespace='/Game')
-def test_disconnect():
-    print('Client disconnected', request.sid)
 
+def sendPlayerData():
+   global currentGame
+   if currentGame != None:
+      dictionary = currentGame.getPlayerDictionary()
+      emit('playerData', {'players': dictionary}, namespace='/Game', broadcast=True)
 
+def sendGameData():
+   global currentGame
+   if currentGame != None:
+      emit('gameData', json.dumps({
+            'game': 
+            { 
+               'numPlayers': currentGame.numPlayers,
+               'gameTime': currentGame.timeElapsed(),
+               'players': currentGame.getPlayerDictionary()
+            }
+         }), namespace='/Game', broadcast=True)
+
+@socketio.on('disconnect_request', namespace='/Game')
+def disconnect_request():
+    @copy_current_request_context
+    def can_disconnect():
+        disconnect()
+
+@socketio.on('response', namespace='/Game')
+def response(message):
+   print(message.data)
 
 def get_ip():
    """

@@ -12,6 +12,7 @@ class GameModel:
         '''Construct from any number of variables.
         :param **kwargs: Valid kwargs: gameId, startTime, players, type'''
         self.__build(**kwargs)
+        self.updatePlayers()
 
     def __build(self, **kwargs):
         '''Construct from any number of variables.
@@ -20,7 +21,8 @@ class GameModel:
         self.__gameId : int = kwargs.get('gameId', self.__generateId(kwargs.get("gameService")))
         self.startTime : float = kwargs.get('startTime', time.time())
         self.players : list[PlayerModel] = kwargs.get('players', list())
-        self.type : GameType = kwargs.get('type', GameType())
+        self.type : str = kwargs.get('type', 'FFA')
+        self.numPlayers = len(self.players)
 
     def __generateId(self, gameService):
         if gameService == None:
@@ -35,6 +37,21 @@ class GameModel:
             return player.score
 
         self.players.sort(reverse=True, key=sortFunc)
+
+    def getPlayerDictionary(self):
+        players = list()
+
+        for player in self.players:
+            players.append({
+                'name': player.name,
+                'score': player.score, 
+                'kills': player.kills,
+                'deaths': player.deaths,
+                'lives': player.lives,
+                'rank': player.rank
+                })
+        
+        return players
     
     def getPlaceSuffix(self, place):
             suffix = ''
@@ -55,14 +72,40 @@ class GameModel:
 
     def updatePlayers(self, *args : PlayerModel):
         '''Set each player in this GameModel to those
-         contained in *args'''
-     
-        for player in args:
-            if player != None:
-                for ii in range(len(self.players)):
-                    if self.players[ii].robotIsPlayer(player.getId()):
-                        self.players[ii] = player
-                        break
+         contained in *args,
+        Then update all players' ranks'''
+
+        #set players to those in args
+        if args != None:
+            for player in args:
+                if player != None:
+                    for ii in range(len(self.players)):
+                        if self.players[ii].robotIsPlayer(player.getId()):
+                            player.updateScore()
+                            self.players[ii] = player
+                            break
+        
+        self.sortPlayers()
+        self.updateRank()
+
+    def updateRank(self):
+        #update rank
+        for ii in range(self.numPlayers):
+            score = self.players[ii].score
+            rank = 4
+
+            if score > 0:
+                rank = ii + 1
+
+                if ii > 0 and ii < 3:
+                    #check if this player is tied with the previous
+                    if score == self.players[ii-1].score:
+                        rank = ii
+            
+            self.players[ii].rank = rank
+            
+
+
     
     def serializePlayers(self):
         '''returns a json formatted string containing an array of players in this game'''
@@ -76,31 +119,37 @@ class GameModel:
         self.updatePlayers(*players)
 
         return self.players
-
+        
     def generateLeaderboardHtml(self):
         #returns a html formatted string for the leaderboard view
 
-        html = '''
-        <table class="game"><tr><td></td>'''
+        html = ""
             
         for player in self.players:
-            html = html + '''<td align="center" id="{0}"><p class="header">{1}</p></td>'''.format(player.getId(), player.name)
-            
-        html = html + '''</tr><tr><td><b>Score</b></td>'''
+            position = self.getPlayerDivPosition(player)
 
-        for player in self.players:
-            html = html + '''<td align="center" id="{0}-score">{1}</td>'''.format(player.getId(), player.score)
+            html = html + """
+                <div class="board" id="player{0}" style="position: absolute;left: {5}%;">
+                    <div class="header" id="player{0}">{1}</div>
+                    
+                    <h2 id="player{0}" class="depth">Score</h2>
+                    <p class="score" id="player{0}">{2}</p>
+                    
+                    <h2 id="player{0}" class="depth">Kills</h2>
+                    <p class="kills" id="player{0}">{3}</p>
+                    
+                    <h2 id="player{0}" class="depth">Deaths</h2>
+                    <p class="deaths" id="player{0}">{4}</p>
+                </div>""".format(player.rank, player.name, player.score, player.kills,
+                player.deaths, position)
+                
+        html = html.replace("\n", "").replace("\r", "").replace("    ", "")
 
-        html = html + '''</tr><tr><td><b>Kills</b></td>'''
-
-        for player in self.players:
-            html = html + '''<td align="center" id="{0}-kills">{1}</td>'''.format(player.getId(), player.kills)
-        
-        html = html + '''</tr><tr><td><b>Deaths</b></td>'''
-            
-        for player in self.players:
-            html = html + '''<td align="center" id="{0}-deaths">{1}</td>'''.format(player.getId(), player.deaths)
-        
-        html = html + '''</tr></table>'''
 
         return html
+    
+    def getPlayerDivPosition(self, player):
+        self.sortPlayers()
+        index = self.players.index(player) + 1
+
+        return 100 * (index / (self.numPlayers + 1))

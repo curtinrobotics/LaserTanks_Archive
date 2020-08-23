@@ -9,7 +9,187 @@
     --radio-font-size: 40px;
     --table-header-font-size:50px;
     --table-font-size:40px;
+
+    --gold: #e9d500;
+    --faded-gold: #2e20079f;
+    --dark-gold:#5e471e;
+    --silver: #d6d6d6;
+    --faded-silver: #4949477c;
+    --dark-silver: #494947;
+    --bronze: #e28813f8;
+    --faded-bronze: #42403cb6;
+    --dark-bronze: #504736;
 }
+
+.leaderboard {
+    width: fit-content;
+    align-self: center;
+    align-content: center;
+
+    /*Code from https://stackoverflow.com/questions/3053205/how-create-table-only-using-div-tag-and-css */
+    display: table-row;         
+    width: auto;         
+    background-color: #eee;         
+    border: 1px solid var(--dark-silver);         
+    border-spacing: 0px; /* cellspacing:poor IE support for  this */
+    clear: both;
+}
+
+p {
+    border-spacing: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+h2 {
+    border-spacing: 0px;
+    padding: 0px;
+    margin: 0px;
+    padding-top: 15px;
+    margin: 0px;
+}
+
+.div-table-row {
+    display: table-row;
+    width: auto;
+    clear: both;
+  }
+.depth {
+    font-family: Arial Black, Arial Bold, Gadget, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+#player1.depth{
+    background-color: var(--dark-gold);
+    color: transparent;
+    text-shadow: 0px 1px 2px var(--faded-gold);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
+}
+
+#player2.depth {
+    background-color: var(--dark-silver);
+    color: transparent;
+    text-shadow: 0px 2px 3px rgba(var(--silver), 0.5);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
+}
+
+#player3.depth {
+    background-color: var(--dark-bronze);
+    color: transparent;
+    text-shadow: 0px 2px 3px rgba(var(--bronze), 0.5);
+    -webkit-background-clip: text;
+       -moz-background-clip: text;
+            background-clip: text;
+}
+
+#player4.depth{
+    color: #efefef;
+    text-shadow: 0px 2px 3px rgba(202, 0, 0, 0.377);
+}
+
+
+.header,
+.score,
+.kills,
+.deaths {
+    border: none;
+    border-width: 0cm;
+    border-color: transparent;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 40px;
+}
+.header {
+    font-size:60px;
+    padding-bottom: 5px;
+    font-family: Arial Black, Arial Bold, Gadget, sans-serif;
+    font-weight: 700;
+    text-align: center;
+    width: fit-content;
+}
+
+.board {
+    min-width: 80px;
+    width: 200px;
+    margin-left: -100px;
+
+    /*from https://stackoverflow.com/questions/3053205/how-create-table-only-using-div-tag-and-css*/
+    float: left; /* fix for  buggy browsers */
+    display: table-column;         
+    width: 200px;         
+    background-color: #ccc;
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow: auto;
+
+    max-height: 80%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#player1.header {
+    border-bottom: 5px solid transparent;
+    border-image-source: linear-gradient(to right, rgba(var(--dark-gold), 0.01), var(--gold), rgba(var(--dark-gold), 0.01)); 
+    border-image-slice: 5;
+}
+
+#player1.board {
+    border: 5px solid transparent;
+    border-image-source: linear-gradient(to bottom right, var(--gold) 0%,var(--dark-gold) 100%); 
+    border-image-slice: 5;
+
+    background-image: linear-gradient(to top left, var(--gold) 0%, var(--dark-gold) 100%);
+}
+
+#player2.header {
+    border-bottom: 5px solid transparent;
+    border-image-source: linear-gradient(to right, rgba(var(--dark-silver), 0.01), var(--silver), rgba(var(--dark-silver), 0.01)); 
+    border-image-slice: 5;
+}
+
+#player2.board {
+    border: 5px solid transparent;
+    border-image-source: linear-gradient(to bottom right, var(--silver) 0%, var(--dark-silver) 100%); 
+    border-image-slice: 5;
+    background-image: linear-gradient(to top left, var(--silver) 0%, var(--dark-silver) 100%);
+}
+
+#player3.header {
+    border-bottom: 5px solid transparent;
+    border-image-source: linear-gradient(to right, rgba(var(--dark-bronze), 0.01), var(--bronze), rgba(var(--dark-bronze), 0.01)); 
+    border-image-slice: 5;
+}
+
+#player3.board {
+    border: 5px solid transparent;
+    border-image-source: linear-gradient(to bottom right, var(--bronze) 0%, var(--dark-bronze) 100%); 
+    border-image-slice: 5;
+    background-image: linear-gradient(to top left, var(--bronze) 0%, var(--dark-bronze) 100%);
+
+}
+
+#player4.header,
+#player4.score,
+#player4.kills,
+#player4.deaths {
+    font-size: 40px;
+    color: white;
+}
+
+#player4 {
+    background-color: transparent;
+    background: none;
+}
+
 
 input {
     transition: 0.3s;
@@ -25,7 +205,7 @@ body {
     align-self: center;
     width: 80%;
     top: calc(50% - attr(height) / 2);
-    padding: 15px;
+    padding: 0px;
 }
 
 .header {

@@ -4,30 +4,50 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Laser Tanks</title>
+		<title>{{game.type}} Game | Laser Tanks</title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-		<link rel="stylesheet" href={{url_for('static', filename='dist/theme/laser.css')}} id="theme">
-		<link rel="stylesheet" href={{url_for('static', filename="plugin/highlight/monokai.css")}}>
 		 
 		<script src="//code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
 		<script type="text/javascript" charset="utf-8">
+			var socket;
+
 			$(document).ready(function() {
 				namespace = '/Game';
 
 				// Connect to the Socket.IO server.
 				// The connection URL has the following format, relative to the current page:
 				//     http[s]://<domain>:<port>[/<namespace>]
-				var socket = io(namespace);
+				socket = io(namespace);
 
-				// Event handler for server sent data.
-				// This updates the leaderboard
 				socket.on('render', function(msg) {
-					$('#leaderboard').empty();
-					$('#leaderboard').append(msg.html);
+					$('.leaderboard').empty();
+					$('.leaderboard').append(msg.html);
 				});
+			});
+
+
+			socket.on('gameData', function(msg) {
+				var ii;
+				var numPlayers = msg.game.numPlayers
+				socket.emit('response', {'data': msg.game.players})
+				
+				for(ii = 0; ii < numPlayers; ii++) {
+					var rank = msg.players[ii].rank;
+
+					//update leaderboard fields
+					$('#player${rank}.header').text(msg.players[ii].name);
+					$('#player${rank}.score').text(msg.players[ii].score);
+					$('#player${rank}.kills').text(msg.players[ii].kills);
+					$('#player${rank}.deaths').text(msg.players[ii].deaths);
+
+					//change position
+					var pos = 100 * (rank / numPlayers) - 200;
+
+					$('#player${rank}').animate(
+						{left: "${pos}%"}, 700);
+				}
 			});
 		</script>
     
@@ -36,11 +56,7 @@
 	</head>
 
 	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section id="leaderboard">
-				</section>
-			</div>
-		</div>
+		<div class="header" style="position: absolute;top: 8%;font-size: 60px;color: white;text-align: center;left: 50%; transform: translateX(-50%);width: 80%;">{{game.type}} Game Leaderboard</div>
+	<div class="leaderboard"></div>
 	</body>
 </html>
