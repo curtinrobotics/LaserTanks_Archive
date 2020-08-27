@@ -28,15 +28,23 @@ void setup()
   pinMode(ledPin, OUTPUT);
   pinMode(13, OUTPUT);
   
-  pinMode(interruptPin, INPUT_PULLUP);// for TESTING PURPOSE
-  attachInterrupt(digitalPinToInterrupt(interruptPin),testSlave,FALLING);
+ pinMode(interruptPin, INPUT_PULLUP);// for TESTING PURPOSE
+ //attachInterrupt(digitalPinToInterrupt(interruptPin),testSlave,FALLING);
 
-  testSlave();
+//  testSlave();
 }
 
 void loop() 
 {
-  for(i=1;i<3;i++)
+   if(!digitalRead(interruptPin))
+   {
+    Serial.println("Yeh");
+   int a[] = {1,5};
+   transmissionEvent(a); // For Slave 1, set duration to be 5 seconds for speed powerup
+   }
+   
+  // for(i=1;i<3;i++)
+  if(0)
   {
     in = Wire.requestFrom(i,sizeof(tankID));
     if(in)
@@ -96,22 +104,20 @@ void receiving()
           transmissionEvent(powerup_info); //
      }
   }
-  void transmissionEvent(int trans[])
+  void transmissionEvent(int trans[0 ])
   {
-      Wire.beginTransmission(trans[0]); // powerup number
+      Wire.beginTransmission(1); // powerup number
       Wire.write(trans[1]); // the duration
-      Wire.endTransmission();
+      Wire.endTransmission(1);
+      Serial.println("Sent val");
   }
 
-  void testSlave()
+ /* void testSlave()
   {
    //if(digitalRead(9)); // TESTING PURPOSE
    //{
    Serial.println("Yeh");
-   digitalWrite(13,HIGH);
-   delay(5000);
-   digitalWrite(13,LOW);
-   //int a[] = {1,5};
-   //transmissionEvent(a); // For Slave 1, set duration to be 5 seconds for speed powerup
-   //}
-  }
+   int a[] = {1,5};
+   transmissionEvent(a); // For Slave 1, set duration to be 5 seconds for speed powerup
+  
+  }*/

@@ -92,14 +92,14 @@ void setup() {
   Wire.onRequest(requestEvent);//Send buffered data if any
   Wire.onReceive(receiveEvent);// Master sending Powerup information
 
-  start_time = millis(); // Marks the current time in seconds
-  duration = 5000; // get the duration in Seconds
+  start_time = millis()/1000; // Marks the current time in seconds
+  duration = 5; // get the duration in Seconds
 
 }
 
 void loop()
 {
-  if(  millis() - start_time < duration) // Hence the Powerup is ON
+  if(  millis()/1000 - start_time < duration) // Hence the Powerup is ON
  
   {
     LED_ON(); // Standard for without activation
@@ -247,8 +247,8 @@ void receiveEvent()
 {
   while (0 < Wire.available())
   {
-    start_time = millis() * 1000; // Marks the current time in seconds
-    duration = Wire.read() * 1000; // get the duration in Seconds
+    start_time = millis()/1000; // Marks the current time in seconds
+    duration = Wire.read(); // get the duration in Seconds
     Serial.println("The starting Time and Duration in seconds is:");
     Serial.println(start_time);
     Serial.println(duration);
