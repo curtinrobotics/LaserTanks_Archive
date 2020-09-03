@@ -6,8 +6,9 @@
  */
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
-
-
+#define T1   
+#define T2
+#define T3 
 
 bool check =false;
 bool in = false;
