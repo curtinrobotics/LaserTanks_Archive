@@ -6,9 +6,9 @@
  */
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
-#define T1   
-#define T2
-#define T3 
+#define T1 12345678   
+#define T2 12345678
+#define T3 12345678
 
 bool check =false;
 bool in = false;
@@ -30,31 +30,25 @@ void setup()
   pinMode(13, OUTPUT);
   
  pinMode(interruptPin, INPUT_PULLUP);// for TESTING PURPOSE
- //attachInterrupt(digitalPinToInterrupt(interruptPin),testSlave,FALLING);
-
-//  testSlave();
 }
 
 void loop() 
 {
    if(!digitalRead(interruptPin))
    {
-    Serial.println("Yeh");
+    Serial.println("Testing Transmission:");
    int a[] = {1,5};
    transmissionEvent(a); // For Slave 1, set duration to be 5 seconds for speed powerup
    }
    
-  // for(i=1;i<3;i++)
-  if(0)
+  for(i=1;i<3;i++)
+  //if(0)
   {
-    in = Wire.requestFrom(i,sizeof(tankID));
-    if(in)
-    {
+      Wire.requestFrom(i,7);
       Serial.print("From Powerup number:  ");
       Serial.println(i);
       receiving();
       // insert code for transmit data to IDE
-    }
   }
   //printloop(); not sure what this does so ill leave it in
 
@@ -79,16 +73,15 @@ void receiving()
   String str = "";
   delay(5);
   
-  while (Wire.available()>5)
+  while (Wire.available())
   {
     // loop through all but the last
-    for (int ii=0; ii < sizeof(tankID); ii++)
+    for (int ii=0; ii < 7; ii++)
     {
       tankID[ii] = Wire.read(); // receive byte as a character
       str += tankID[ii]; // store ID as a string
     }
-    
-    if(str != "0255255255255255255") // if ID not invalid 
+    if(str != "255255255255255255") // if ID not invalid 
     {
       Serial.println(str);
     }

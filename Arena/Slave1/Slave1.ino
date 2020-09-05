@@ -53,7 +53,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(16, LED_PIN, NEO_GRB);
 
 int start_time;
 int duration;
-uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 }, uidLength, i; // Buffer to store the returned UID of the card
+uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 }, uidLength; // Buffer to store the returned UID of the card
 int toggle = 5; //The toggeling pin from the master to indicate when card is found*****************************
 int rst = 2; //Forcefully reset the Powerup Arduino
 boolean activated = false;
@@ -99,19 +99,20 @@ void setup() {
 
 void loop()
 {
+  
   if(  millis()/1000 - start_time < duration) // Hence the Powerup is ON
  
   {
     LED_ON(); // Standard for without activation
-
-     boolean success = false;
+    boolean success = false;
+     
   // Wait for an ISO14443A type cards (Mifare, etc.).  When one is found
   // 'uid' will be populated with the UID, and uidLength will indicate
   // if the uid is 4 bytes (Mifare Classic) or 7 bytes (Mifare Ultralight)
   success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &uid[0], &uidLength);
+  //Serial.println(activated);
   
-  Serial.println(success);
-    if (success)
+    if (success == 1)
     {
       digitalWrite(rst, HIGH);
       activated = true;
@@ -226,6 +227,7 @@ void requestEvent()
 {
   if (activated)
   {
+    Serial.println(activated);
     Wire.write(uid[0]);              // sends one byte at a time
     Wire.write(uid[1]);
     Wire.write(uid[2]);
@@ -264,7 +266,7 @@ void printBuffer()
   //calculating the UID
   for (uint8_t i = 0; i < uidLength; i++)
   {
-    Serial.print(" 0x"); Serial.print(uid[i], HEX);
+    Serial.print(" 0x"); Serial.print(uid[i]);
   }
 }
 void readBuffer()
