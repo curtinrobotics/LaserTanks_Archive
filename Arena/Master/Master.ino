@@ -37,7 +37,7 @@ void loop()
    if(!digitalRead(interruptPin))
    {
     Serial.println("Testing Transmission:");
-   int a[] = {1,5};
+   int a[] = {1,15};
    transmissionEvent(a); // For Slave 1, set duration to be 5 seconds for speed powerup
    }
    
@@ -45,8 +45,6 @@ void loop()
   //if(0)
   {
       Wire.requestFrom(i,7);
-      Serial.print("From Powerup number:  ");
-      Serial.println(i);
       receiving();
       // insert code for transmit data to IDE
   }
@@ -81,12 +79,15 @@ void receiving()
       tankID[ii] = Wire.read(); // receive byte as a character
       str += tankID[ii]; // store ID as a string
     }
-    if(str != "255255255255255255") // if ID not invalid 
+    if(str != "0255255255255255255") // if ID not invalid 
     {
       Serial.println(str);
+      tankIdentify(str);
     }
   }
  }
+
+ void tankIdentify
   
   void receiveEvent()
   {

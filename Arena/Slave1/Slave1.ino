@@ -46,7 +46,7 @@ PN532 nfc(pn532i2c);
 #endif
 #include <Wire.h>
 #define LED_PIN 6 /*the light ring signal cable is at pin 6*/
-#define powerUpCol strip.Color(100, 0, 0) /* this sets the resting colour of the lights*/
+#define powerUpCol strip.Color(100,0,0) /* this sets the resting colour of the lights*/
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(16, LED_PIN, NEO_GRB);
 
 
@@ -86,7 +86,7 @@ void setup() {
   //The 2 following codes are for the intializing of the light strip
   strip.begin(); // this innitilises the light for the powerUp
   pinMode(2, INPUT_PULLUP);
-
+  strip.setBrightness(20);
   Wire.begin(SLAVE_NUM);//Wire Identifier for transfering of data*****************************************
   //register event
   Wire.onRequest(requestEvent);//Send buffered data if any
@@ -119,6 +119,7 @@ void loop()
 
       printBuffer(); // Function call for printing buffer value
       LED_ACTIVATED(); // Function call for set LEDs to activated protocol
+      duration = 0;
     }
     else
     {
@@ -153,7 +154,6 @@ void LED_ACTIVATED()
   //light ring Code for on contact
   setRing(powerUpCol);
   setRing(strip.Color(0, 0, 255));
-
   ringBlink(powerUpCol, 50, 10); // fast flashes for activation
   setRing(strip.Color(255, 255, 230));
   setRing(strip.Color(0, 0, 0));
