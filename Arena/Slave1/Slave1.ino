@@ -46,13 +46,14 @@ PN532 nfc(pn532i2c);
 #endif
 #include <Wire.h>
 #define LED_PIN 6 /*the light ring signal cable is at pin 6*/
-#define powerUpCol strip.Color(100,0,0) /* this sets the resting colour of the lights*/
+#define powerUpCol strip.Color(r,g,b) /* this sets the resting colour of the lights*/
 Adafruit_NeoPixel strip = Adafruit_NeoPixel(16, LED_PIN, NEO_GRB);
 
 
 
 int start_time;
 int duration;
+int r=100,b=0,g=0;
 uint8_t uid[] = { 0, 0, 0, 0, 0, 0, 0 }, uidLength; // Buffer to store the returned UID of the card
 int toggle = 5; //The toggeling pin from the master to indicate when card is found*****************************
 int rst = 2; //Forcefully reset the Powerup Arduino
@@ -246,14 +247,52 @@ void requestEvent()
    Outputs: nil, only sets global variables correct timings
 */
 void receiveEvent()
-{
-  while (0 < Wire.available())
+{ 
+  int powerupType = 0; 
+  while (1 < Wire.available())
   {
     start_time = millis()/1000; // Marks the current time in seconds
     duration = Wire.read(); // get the duration in Seconds
+    powerupType = Wire.read(); // Powerup
+    
+    ringColour(powerupType);
     Serial.println("The starting Time and Duration in seconds is:");
     Serial.println(start_time);
     Serial.println(duration);
+    Serial.println(powerupType);
+  }
+}
+
+void ringColour (int op)
+{
+  switch (op) 
+  {
+    case 0:
+    case 1:
+         r = 100;
+         g = 0;
+         b = 0;
+    break;
+    case 2:
+         r = 0;
+         g = 100;
+         b = 0;
+    break;
+    case 3:
+         r = 0;
+         g = 0;
+         b = 100;
+    break;
+    case 4:
+         r = 100;
+         g = 100;
+         b = 0;
+    break;
+    case 5:
+         r = 100;
+         g = 0;
+         b = 100;
+    break;
   }
 }
 

@@ -9,13 +9,15 @@
 #define T1 12345678   
 #define T2 12345678
 #define T3 12345678
+#define POWERUP_NUM 3
 
+ 
 bool check =false;
 bool in = false;
-int i = 1;
+int powerupType[POWERUP_NUM]; // [p0,p1...pn]
 const int ledPin =53;
 const int interruptPin = 3;
-uint8_t tankID[7];
+uint8_t collisionBuffer[POWERUP_NUM][2]; //[tank ID, powerup type] 
 //
 LiquidCrystal_I2C lcd(0x27,16,2);  
 void setup() 
@@ -34,17 +36,20 @@ void setup()
 
 void loop() 
 {
-   if(!digitalRead(interruptPin))
+   if(!digitalRead(interruptPin)) // testing
    {
+    ii =1;
+    cycle[ii]++;
+    cycle[ii] = cycle[ii]%6; 
     Serial.println("Testing Transmission:");
-   int a[] = {1,15};
+   int a[] = {1,15,cycle[ii]};
    transmissionEvent(a); // For Slave 1, set duration to be 5 seconds for speed powerup
    }
    
-  for(i=1;i<3;i++)
+  for(int jj=1;jj<3;jj++)
   //if(0)
   {
-      Wire.requestFrom(i,7);
+      Wire.requestFrom(jj,7);
       receiving();
       // insert code for transmit data to IDE
   }
@@ -68,41 +73,41 @@ void printHex(unsigned int numberToPrint)
  */
 void receiving()
 { 
-  String str = "";
-  delay(5);
-  
-  while (Wire.available())
-  {
-    // loop through all but the last
-    for (int ii=0; ii < 7; ii++)
-    {
-      tankID[ii] = Wire.read(); // receive byte as a character
-      str += tankID[ii]; // store ID as a string
-    }
-    if(str != "0255255255255255255") // if ID not invalid 
-    {
-      Serial.println(str);
-      tankIdentify(str);
-    }
-  }
+
  }
 
- void tankIdentify
+ void tankIdentify(String str)
+ {
+    int tankId = 0;
+    if str== T1;
+    {
+       tankId = 1;
+    }
+    if str== T2;
+    {
+       tankId = 2;
+    }
+    if str== T3;
+    {
+       tankId = 3;
+    }
+ }
   
   void receiveEvent()
   {
     int powerup_info[2]; // Name,Duration
     while (0 < Wire.available())
      {
-          powerup_info[0]=Wire.read();// Slave Number
+          ii = Wire.read();// Slave Number
           powerup_info[1]=Wire.read();// Duration for power up
           transmissionEvent(powerup_info); //
      }
   }
-  void transmissionEvent(int trans[0 ])
+  void transmissionEvent(int trans[0])
   {
-      Wire.beginTransmission(1); // powerup number
+      Wire.beginTransmission(trans[0]); // powerup number
       Wire.write(trans[1]); // the duration
+      Wire.write(trans[2]); // powerupType
       Wire.endTransmission(1);
       Serial.println("Sent val");
   }
